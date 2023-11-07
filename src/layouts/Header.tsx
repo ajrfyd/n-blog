@@ -26,6 +26,7 @@ const Block = styled.div`
   height: 4rem;
   padding: 1rem 2rem;
   position: fixed;
+  width: 100%;
   top:0;
   left: 0;
 `
@@ -64,6 +65,10 @@ const HomeButton = styled(Link)`
   outline: none;
   background: transparent;
   cursor: pointer;
+
+  h2 {
+    font-size: 2.5rem;
+  }
 
   &:hover {
     color: #393939;
