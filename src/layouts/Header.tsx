@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import CustomButton from '../components/CustomButton';
+import { Sun } from "lucide-react";
 
 const Header = () => {
-
-
   return (
     <>
       <Block>
         <Inner>
           <HomeButton to="/">
-            <h2>
+            <h2 >
               Klog
             </h2>
           </HomeButton>
+
+          <CustomButton isIcon onClick={console.log}><Sun /></CustomButton>          
+          <CustomButton onClick={console.log}>Button</CustomButton>
         </Inner>
       </Block>
       <Wall />
@@ -23,16 +26,18 @@ const Header = () => {
 export default Header;
 
 const Block = styled.div`
-  height: 4rem;
+  height: 5rem;
   padding: 1rem 2rem;
   position: fixed;
   width: 100%;
   top:0;
   left: 0;
+
+  background: ${({ theme }) => theme.themes.color.brown};
 `
 
 const Inner = styled.div`
-  width: 100%;
+  width: calc(100% - 6rem);
   height: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -40,22 +45,22 @@ const Inner = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  @media (max-width: 1919px) {
-    width: 1376px;
-  }
-
   @media (max-width: 1440px) {
-    width: 1024px;
+    width: calc(100% - 5rem);
   }
 
-  @media (max-width: 1056px) {
-    width: calc(100% - 2rem);
+  @media (max-width: 1200px) {
+    width: calc(100% - 4rem);
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100% - 3rem);
   }
   
 `;
 
 const HomeButton = styled(Link)`
-  color: #000000ac;
+  /* color: ${({ theme }) => theme.themes.text.default}; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,5 +81,5 @@ const HomeButton = styled(Link)`
 `; 
 
 const Wall = styled.div`
-  height: 4rem;
+  height: 5rem;
 `

@@ -2,20 +2,17 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./layouts/Header";
 import Main from "./layouts/Main";
-import GlobalStyles from "./GlobalStyles";
-import styled from "styled-components";
+import BlogMain from "./pages/BlogMain";
 
 const App = () => {
   return (
     <React.Fragment>
-      <GlobalStyles />
       <Header />
-      <div>
-        <Routes>
-          <Route path="/" element={<Main />}/>
-          {/* <Route path="/" element={< />}/> */}
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Main />}/>
+        <Route path="blog" element={<BlogMain />}/>
+        {/* <Route path="/" element={< />}/> */}
+      </Routes>
     </React.Fragment>
   )
 };

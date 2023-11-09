@@ -5,6 +5,12 @@ const Main = () => {
   return (
     <Container>
       Hello Main??
+      <Block />
+      <Block />
+      <Block />
+      <Block />
+      <Block />
+
     </Container>
   )
 }
@@ -16,5 +22,7 @@ const Container = styled.div`
 `
 
 const Block = styled.div`
-  top: 4rem;
+  width: 100%;
+  height: 50vh;
+  border: 1px solid red;
 `
