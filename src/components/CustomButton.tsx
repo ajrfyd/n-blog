@@ -72,7 +72,7 @@ const Button = styled.button<CustomButtonProps>`
     font-size: ${sizes[size].fontSize};
   `}
 
-  ${({ theme, isIcon }) => isIcon && css`
+  ${({ isIcon }) => isIcon && css`
     width: 2.5rem;
     /* height: 2.5rem; */
     border-radius: 50%;
