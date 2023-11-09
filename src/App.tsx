@@ -10,7 +10,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Main />}/>
-        <Route path="blog" element={<BlogMain />}/>
+        <Route path="/blogList" element={<BlogMain />}/>
         {/* <Route path="/" element={< />}/> */}
       </Routes>
     </React.Fragment>
