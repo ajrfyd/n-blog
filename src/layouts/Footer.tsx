@@ -1,11 +1,9 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-
 const Footer = () => {
 
   return (
-    <div>
+    <footer>
       Hello Footer??
-    </div>
+    </footer>
   )
 }
 
