@@ -1,10 +1,8 @@
-import React from "react";
 import styled from "styled-components";
-import GridItem from "./GridItem";
 import { PostType } from '../pages/BlogMain';
 import CustomButton from "./CustomButton";
 
-const Post = ({ id, title, body, tags, createdAt }: PostType) => {
+const Post = ({ title, tags }: PostType) => {
 
   return (
     <Container>
@@ -32,4 +30,4 @@ const Title = styled.h2`
   color: ${({ theme }) => theme.themes.color.teal};
 `;
 const TagContainer = styled.ul``;
-const Tag = styled.li``;
+// const Tag = styled.li``;
