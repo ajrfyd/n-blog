@@ -7,13 +7,13 @@ type CustomButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: string;
   size?: "lg" | "sm" | "md";
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  isIcon?: boolean;
+  $isIcon?: boolean;
 };
 
-const CustomButton: React.FC<CustomButtonProps> = ({ children, color = "#000", size = "md", onClick, isIcon, ...rest }: CustomButtonProps) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ children, color = "#000", size = "md", onClick, $isIcon, ...rest }: CustomButtonProps) => {
 
   return (
-    <Button color={color} size={size} onClick={onClick} isIcon={isIcon} {...rest}>
+    <Button color={color} size={size} onClick={onClick} $isIcon={$isIcon} {...rest}>
       { children }
     </Button>
   )
@@ -72,7 +72,7 @@ const Button = styled.button<CustomButtonProps>`
     font-size: ${sizes[size].fontSize};
   `}
 
-  ${({ isIcon }) => isIcon && css`
+  ${({ $isIcon }) => $isIcon && css`
     width: 2.5rem;
     /* height: 2.5rem; */
     border-radius: 50%;

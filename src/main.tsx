@@ -9,12 +9,10 @@ import { themes } from './lib/styles/themes.ts';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <GlobalStyles />
-        <ThemeProvider theme={{ themes }}>
-          <App />
-        </ThemeProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <GlobalStyles />
+      <ThemeProvider theme={{ themes }}>
+        <App />
+      </ThemeProvider>
+  </BrowserRouter>
 )
