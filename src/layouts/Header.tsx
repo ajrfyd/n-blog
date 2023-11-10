@@ -14,7 +14,7 @@ const Header = () => {
             </h2>
           </HomeButton>
 
-          <CustomButton isIcon onClick={console.log}><Sun /></CustomButton>          
+          <CustomButton $isIcon onClick={console.log}><Sun /></CustomButton>          
           <CustomButton onClick={console.log}>Button</CustomButton>
         </Inner>
       </Block>
