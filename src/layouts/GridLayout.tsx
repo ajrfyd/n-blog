@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import React from 'react';
+import { ChildrenProp } from '../ types/propsTypes';
 
-const GridLayout = ({ children }: { children: React.ReactNode}) => {
+type FooterProps = ChildrenProp & {};
+
+const GridLayout = ({ children }: FooterProps) => {
 
   return (
     <GridContainer>
