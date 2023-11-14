@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { PostType } from '../pages/BlogMain';
-import CustomButton from "./CustomButton";
+// import CustomButton from "./CustomButton";
 
 const Post = ({ title, tags }: PostType) => {
-
+  console.log(tags);
   return (
     <Container>
       <Title>{title}</Title>
       <TagContainer>
-        {
-          tags.map(tag => <CustomButton key={tag} size="sm" onClick={console.log}>{tag}</CustomButton>)
-        }
+        {/* {
+          tags.map((tag, idx) => <CustomButton key={tags[idx]} size="sm" onClick={console.log}>{tag}</CustomButton>)
+        } */}
       </TagContainer>
     </Container>
   )

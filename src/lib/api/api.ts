@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const url = import.meta.env.VITE_URL;
+const env = import.meta.env.VITE_ENV;
+const url = env === "development" ? import.meta.env.VITE_DEV_URL :import.meta.env.VITE_URL;
 
 export const getPostsApi = axios.create({
   baseURL: url,

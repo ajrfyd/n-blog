@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CustomButton from '../components/CustomButton';
-import { Sun } from "lucide-react";
+// import { Sun } from "lucide-react";
+import { BookAIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const nav = useNavigate();
+
   return (
     <>
       <Block>
@@ -13,9 +17,9 @@ const Header = () => {
               Klog
             </h2>
           </HomeButton>
-
-          <CustomButton $isIcon onClick={console.log}><Sun /></CustomButton>          
-          <CustomButton onClick={console.log}>Button</CustomButton>
+          <CustomButton $isIcon onClick={() => nav("/blogList")}><BookAIcon /></CustomButton>
+          {/* <CustomButton $isIcon onClick={console.log}><Sun /></CustomButton>           */}
+          {/* <CustomButton onClick={console.log}>Button</CustomButton> */}
         </Inner>
       </Block>
       <Wall />

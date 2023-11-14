@@ -29,7 +29,6 @@ const SearchSectionContainer = styled.section<Pick<SearchSectionProps, "$hasMarg
   display: flex;
   gap: 1rem;
 
-  border: 2px solid red;
   padding-bottom: 10px;
   margin-bottom: ${({ $hasMargin }) => $hasMargin ? "1rem" : "" };
 
