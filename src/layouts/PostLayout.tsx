@@ -11,10 +11,10 @@ import { Input } from "../components/SearchInput";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 
-type Tag = {
-  id: string;
-  tag: string;
-};
+// type Tag = {
+//   id: string;
+//   tag: string;
+// };
 
 type MdTagType = {
   id: string;

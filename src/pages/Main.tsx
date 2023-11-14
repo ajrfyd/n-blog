@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
-  const tRef = useRef<HTMLDivElement | null>(null);
+  // const tRef = useRef<HTMLDivElement | null>(null);
   const pRef = useRef<HTMLParagraphElement | null>(null);
 
   useEffect(() => {

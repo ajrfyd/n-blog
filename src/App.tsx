@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./layouts/Header";
 import Main from "./pages/Main";
 import BlogMain from "./pages/BlogMain";
-import BackDrop from './components/BackDrop';
+// import BackDrop from './components/BackDrop';
 import PostLayout from "./layouts/PostLayout";
 
 const App = () => {

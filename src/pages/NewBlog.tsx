@@ -1,14 +1,11 @@
 import MDEditor from "@uiw/react-md-editor";
-import React, { SetStateAction, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import ContentContainer from "../components/ContentContainer";
 
 const NewBlog = () => {
   const [content, setContent] = useState<string | undefined>("");
 
-  const t =  (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e)
-  }
   console.log(content);
 
   return (
