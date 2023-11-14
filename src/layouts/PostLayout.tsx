@@ -39,11 +39,11 @@ const PostLayout = () => {
   const onChangText = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setPost(prev => ({ ...prev, title: e.target.value })), [post.title]);
   const onChangeBody = useCallback<MdChangeType>((value) => setPost(prev => ({...prev, body: value })), [post.body]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
-    axios("http://localhost:8080/posts/write", { data: { ...post, id: uuid(), createdAt: new Date(Date.now()) }, method: "post" });
-    console.log(post);
+    const a = await axios("http://localhost:8080/posts/write", { data: { ...post, id: uuid(), createdAt: new Date(Date.now()) }, method: "post" });
+    console.log(a);
   };
 
   console.log("render");

@@ -20,6 +20,7 @@ const BlogMain = () => {
 
   const getPosts = async() => {
     const { data }  = await getPostsApi({ method: "get", url: "posts" });
+    console.log(data);
     setPosts(data);
   };
 

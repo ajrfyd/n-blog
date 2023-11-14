@@ -23,7 +23,7 @@ const Block = styled.div<IntoroBlockProps>`
   height: 60vh;
   display: flex;
   align-items: flex-end;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   overflow: hidden;
   margin-top: 5rem;
   
