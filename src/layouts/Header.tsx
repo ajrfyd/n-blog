@@ -9,7 +9,7 @@ const Header = () => {
       <Block>
         <Inner>
           <HomeButton to="/">
-            <h2 >
+            <h2 style={{ textShadow: "2px 2px 2px rgba(0, 0, 0, .4)"}}>
               Klog
             </h2>
           </HomeButton>
@@ -32,6 +32,7 @@ const Block = styled.div`
   width: 100%;
   top:0;
   left: 0;
+  z-index: 10;
 
   background: ${({ theme }) => theme.themes.color.brown};
 `

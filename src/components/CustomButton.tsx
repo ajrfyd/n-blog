@@ -8,12 +8,13 @@ type CustomButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: "lg" | "sm" | "md";
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   $isIcon?: boolean;
+  $bgColor?: string;
 };
 
-const CustomButton: React.FC<CustomButtonProps> = ({ children, color = "#000", size = "md", onClick, $isIcon, ...rest }: CustomButtonProps) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ children, color, size = "md", onClick, $isIcon, $bgColor, ...rest }: CustomButtonProps) => {
 
   return (
-    <Button color={color} size={size} onClick={onClick} $isIcon={$isIcon} {...rest}>
+    <Button color={color} size={size} onClick={onClick} $isIcon={$isIcon} $bgColor={$bgColor} {...rest}>
       { children }
     </Button>
   )
@@ -38,7 +39,6 @@ const sizes = {
 } as const;
 
 CustomButton.defaultProps = {
-  color: "#000",
   size: "md",
   className: ""
 }
@@ -48,11 +48,8 @@ const Button = styled.button<CustomButtonProps>`
   align-items: center;
   outline: none;
   border: none;
-  border-radius: 5px;
-  /* color: ${({ color }) => `${color}`}; */
-  ${({ color, theme }) => color && css`
-    color: ${ color ?? theme.themes.text.default };
-  `}
+  border-radius: 8px;
+  
 
   font-weight: bold;
   cursor: pointer;
@@ -62,16 +59,19 @@ const Button = styled.button<CustomButtonProps>`
 
   height: 2rem;
   font-size: 1rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
 
   /* background-color: #f2f2f2; */
-  background-color: ${({ theme }) => theme.themes.color.white};
-  
-  /* bg-color  */
+  background-color: ${({ theme, $bgColor }) => $bgColor ?? theme.themes.color.white};
+  color: ${({ color, theme }) => color ?? theme.themes.text.black};
+
+  /* size  */
   ${({ size }) => size && css`
     height: ${sizes[size].height};
     font-size: ${sizes[size].fontSize};
   `}
 
+  
   ${({ $isIcon }) => $isIcon && css`
     width: 2.5rem;
     /* height: 2.5rem; */
@@ -83,13 +83,13 @@ const Button = styled.button<CustomButtonProps>`
   `};
 
   &:hover {
-    /* background-color: ${lighten(0.1, "#f6f5f6")}; */
-    background-color: ${lighten(0.1, "#fff")};
-
+    background-color: ${({ $bgColor }) => lighten(0.1, `${$bgColor ?? "#fff"}`)}
   }
 
   &:active {
-    background-color: ${darken(0.1, "#fff")};
+    /* background-color: ${darken(0.1, "#fff")}; */
+    background-color: ${({ $bgColor }) => darken(0.1, `${$bgColor ?? "#fff"}`)}
+
   }
 
   & + & {

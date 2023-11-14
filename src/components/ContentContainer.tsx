@@ -4,11 +4,12 @@ import styled from "styled-components";
 type ContentContainerProps = {
   children: React.ReactNode;
   width?: number;
+  style?: React.CSSProperties;
 };
 
-const ContentContainer = ({ children, width = 80 }: ContentContainerProps) => {
+const ContentContainer = ({ children, width = 80, style }: ContentContainerProps) => {
   return (
-    <Container width={width}>
+    <Container width={width} style={style}>
       { children }
     </Container>
   )
@@ -22,5 +23,5 @@ const Container = styled.div<ContentContainerProps>`
   margin: 0 auto;
   padding: 2rem 1rem;
 
-  border: 5px solid var(--teal);
+  /* border: 5px solid var(--teal); */
 `

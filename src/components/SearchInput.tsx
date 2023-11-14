@@ -8,7 +8,7 @@ const SearchInput = ({ placeholder }: SearchInputProps ) => <Input placeholder={
 
 export default SearchInput;
 
-const Input = styled.input`
+export const Input = styled.input`
   background-color: hsl(0, 0%, 100%);
   padding-left: 1rem;
   border-style: solid; 
