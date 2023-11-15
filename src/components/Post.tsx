@@ -1,16 +1,22 @@
 import styled from "styled-components";
-import { PostType } from '../pages/BlogMain';
-// import CustomButton from "./CustomButton";
+import { Tags } from "../ types/postTypes";
+import CustomButton from "./CustomButton";
 
-const Post = ({ title, tags }: PostType) => {
-  console.log(tags);
+type PostPropsType = {
+  title: string;
+  tags: Tags[];
+};
+
+// Todo - title 말줄임 혹은 예쁘게
+
+const Post = ({ title, tags }: PostPropsType) => {
   return (
     <Container>
       <Title>{title}</Title>
       <TagContainer>
-        {/* {
-          tags.map((tag, idx) => <CustomButton key={tags[idx]} size="sm" onClick={console.log}>{tag}</CustomButton>)
-        } */}
+        {
+          tags.map(tag => <CustomButton key={tag.id} size="sm" onClick={console.log}>{tag.label}</CustomButton>)
+        }
       </TagContainer>
     </Container>
   )
@@ -25,9 +31,15 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 `;
-const Title = styled.h2`
+const Title = styled.h3`
   color: ${({ theme }) => theme.themes.color.teal};
+  margin-bottom: 1rem;
 `;
-const TagContainer = styled.ul``;
+const TagContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
 // const Tag = styled.li``;

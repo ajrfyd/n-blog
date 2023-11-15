@@ -10,26 +10,21 @@ import CreatableSelect from "react-select/creatable";
 import { Input } from "../components/SearchInput";
 import { v4 as uuid } from "uuid";
 import axios from "axios";
+import { Tags } from "../ types/postTypes";
 
-// type Tag = {
-//   id: string;
-//   tag: string;
-// };
-
-type MdTagType = {
+export type MdTagType = {
   id: string;
   label: string;
-}
-
-type PostType = {
-  // id: string;
-  title: string;
-  body: string | undefined;
-  tags: MdTagType[];
-  // createdAt: Date | null;
 };
 
+type PostType = {
+  title: string;
+  body: string | undefined;
+  tags: Tags[];
+};
 
+// Todo - CreatableSelect 상태값 따로 관리
+// Todo - ref 사용? 
 type MdChangeType = (value?: string, e?: React.ChangeEvent<HTMLTextAreaElement>) => void;
 
 const PostLayout = () => {
@@ -46,8 +41,6 @@ const PostLayout = () => {
     console.log(a);
   };
 
-  console.log("render");
-  console.log(post);
   return (
     <ContentContainer>
       <FormContainer data-color-mode="light" onSubmit={onSubmit}>
@@ -73,7 +66,7 @@ const PostLayout = () => {
               // options={post.map(tag => ({ label: tag.label, value: tag.id }))}
               value={post.tags.map(tag => ({ label: tag.label, value: tag.id }))}
               // onChange={(tag) => {
-              //   console.log(tag);
+              //   setPost(post.map(p => ))
               // }}
             />
           </div>

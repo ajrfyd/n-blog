@@ -6,8 +6,6 @@ import ContentContainer from "../components/ContentContainer";
 const NewBlog = () => {
   const [content, setContent] = useState<string | undefined>("");
 
-  console.log(content);
-
   return (
     <ContentContainer>
       <MarkDownContainer data-color-mode="light">
