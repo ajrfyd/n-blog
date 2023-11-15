@@ -35,7 +35,8 @@
 > client - Netlify
 >
 > server - Cloudtype
-[사이트](https://k-log3943.netlify.app/)
+
+[Link](https://k-log3943.netlify.app/)
 
 참고
 ---
