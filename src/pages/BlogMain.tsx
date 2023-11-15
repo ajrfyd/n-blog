@@ -5,22 +5,23 @@ import GridLayout from "../layouts/GridLayout";
 import GridItem from "../components/GridItem";
 import Post from "../components/Post";
 import { getPostsApi } from "../lib/api/api";
-
+import { Tags } from "../ types/postTypes";
 
 export type PostType = {
   id: string;
   title: string;
   body: string;
-  tags: string[];
+  tags: Tags[];
   createdAt: Date;
 }
 
 const BlogMain = () => {
   const [posts, setPosts] = useState<PostType[] | []>([]);
-
+  
+  // Todo - react-query 변경
+  // Todo - posts & tags 같이 가져와
   const getPosts = async() => {
     const { data }  = await getPostsApi({ method: "get", url: "posts" });
-    console.log(data);
     setPosts(data);
   };
 

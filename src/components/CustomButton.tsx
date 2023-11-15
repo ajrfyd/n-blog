@@ -69,6 +69,7 @@ const Button = styled.button<CustomButtonProps>`
   ${({ size }) => size && css`
     height: ${sizes[size].height};
     font-size: ${sizes[size].fontSize};
+    margin: ${size === 'sm' ? "5px 0" : ""};
   `}
 
   
