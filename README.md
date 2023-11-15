@@ -31,8 +31,10 @@
 
 ## 배포
 > 개발 중인 프로젝트 입니다.
-> client  Netlify
-> server  Cloudtype
+>
+> client - Netlify
+>
+> server - Cloudtype
 [사이트](https://k-log3943.netlify.app/)
 
 참고
