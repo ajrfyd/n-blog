@@ -26,6 +26,7 @@ export default Post;
 
 const Container = styled.div`
   width: 100%;
+  cursor: pointer;
   
   display: flex;
   flex-direction: column;

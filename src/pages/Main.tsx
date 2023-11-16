@@ -53,19 +53,29 @@ const Main = () => {
   return (
     <Container>
       <IntroBlock>
-        <IntroItem ref={pRef} className="target">JavaScript를 사랑하는 2년차 개발자 입니다.</IntroItem>
+        <IntroItem ref={pRef} className="target">
+          JavaScript를 사랑하는 2년차 개발자 입니다.
+        </IntroItem>
       </IntroBlock>
       <IntroBlock $rTl >
-        <IntroItem ref={pRef} className="target">JavaScript를 사랑하는 2년차 개발자 입니다.</IntroItem>
+        <IntroItem ref={pRef} className="target">
+          배우는 것에 두려움이 없습니다.
+        </IntroItem>
       </IntroBlock>
       <IntroBlock>
-        <IntroItem ref={pRef} className="target">JavaScript를 사랑하는 2년차 개발자 입니다.</IntroItem>
+        <IntroItem ref={pRef} className="target">
+          JavaScript 기반 Front-end에 기술에 관심이 있습니다.
+        </IntroItem>
       </IntroBlock>
       <IntroBlock $rTl>
-        <IntroItem ref={pRef} className="target">JavaScript를 사랑하는 2년차 개발자 입니다.</IntroItem>
+        <IntroItem ref={pRef} className="target">
+          Back-end에도 소홀하지 않습니다.
+        </IntroItem>
       </IntroBlock>
       <IntroBlock>
-        <IntroItem ref={pRef} className="target">JavaScript를 사랑하는 2년차 개발자 입니다.</IntroItem>
+        <IntroItem ref={pRef} className="target">
+          JavaScript는 사랑입니다...
+        </IntroItem>
       </IntroBlock>
     </Container>
   )
