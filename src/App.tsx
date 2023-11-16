@@ -5,6 +5,7 @@ import Main from "./pages/Main";
 import BlogMain from "./pages/BlogMain";
 // import BackDrop from './components/BackDrop';
 import PostLayout from "./layouts/PostLayout";
+import Notification from './layouts/Notification';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         </Route>
         {/* <Route path="/" element={< />}/> */}
       </Routes>
+      <Notification />
       {/* <BackDrop>children</BackDrop>  */}
     </React.Fragment>
   )

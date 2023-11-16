@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CustomButton from '../components/CustomButton';
-// import { Sun } from "lucide-react";
-import { BookAIcon } from "lucide-react";
+import IconMenu from "./IconMenu";
+import { BookOpenText, View, DoorOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { notify } from "../stroe/notify";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
-  const nav = useNavigate();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  const navNoticeHandler = (msg: string) => {
+    dispatch(notify(msg));
+    navigation("/blogList");
+  };
 
   return (
     <>
@@ -17,9 +25,24 @@ const Header = () => {
               Klog
             </h2>
           </HomeButton>
-          <CustomButton $isIcon onClick={() => nav("/blogList")}><BookAIcon /></CustomButton>
-          {/* <CustomButton $isIcon onClick={console.log}><Sun /></CustomButton>           */}
-          {/* <CustomButton onClick={console.log}>Button</CustomButton> */}
+          <IconMenu>
+            <CustomButton 
+              $isIcon 
+              // onClick={() => nav("/blogList")}
+              onClick={() => navNoticeHandler("블로그 페이지 입니다.")}
+            >
+              <BookOpenText />
+            </CustomButton>
+            <CustomButton 
+              $isIcon 
+              onClick={() => dispatch(notify("갤러리 준비중 입니다."))}
+            >
+                <View />
+            </CustomButton>
+            <CustomButton $isIcon onClick={() => dispatch(notify("로그인 준비중입니다."))}>
+              <DoorOpen />
+            </CustomButton>
+          </IconMenu>
         </Inner>
       </Block>
       <Wall />
