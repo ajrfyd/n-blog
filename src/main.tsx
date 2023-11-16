@@ -5,7 +5,7 @@ import GlobalStyles from './GlobalStyles.ts';
 import { ThemeProvider } from 'styled-components';
 import { themes } from './lib/styles/themes.ts';
 import rootReducer from './stroe/index.ts';
-import { legacy_createStore as createStore, applyMiddleware, StoreEnhancer } from 'redux';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import './index.css';

@@ -1,4 +1,4 @@
-import { EnqType, ActionType } from "./type";
+import { EnqType } from "./type";
 import { Dispatch } from "redux";
 export const NOTIFY = "notify_NOTIFY" as const;
 export const ENQ_NOTIFY = "notify_ENQ_NOTIFY" as const;

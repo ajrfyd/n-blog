@@ -11,10 +11,10 @@ const Toast = ({ msg, disappearTime }: ToastProps) => {
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
+    // let isMounted = true;
     setTimeout(() => setIsFading(true), disappearTime);
     return () => {
-      isMounted = false;
+      // isMounted = false;
     }
   }, []);
 
