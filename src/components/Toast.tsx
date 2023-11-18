@@ -36,6 +36,7 @@ const fadeInLeft = keyframes`
   }
 `;
 
+
 const Container = styled.div`
   font-weight: bold;
   color: #fff;

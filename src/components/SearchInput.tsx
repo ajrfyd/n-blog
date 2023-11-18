@@ -2,9 +2,13 @@ import styled from 'styled-components';
 
 type SearchInputProps = {
   placeholder?: string;
+  value?: string;
 };
 
-const SearchInput = ({ placeholder }: SearchInputProps ) => <Input placeholder={placeholder}/>
+const SearchInput = ({ placeholder, value }: SearchInputProps) => value ? <Input placeholder={placeholder} value={value} readOnly /> : <Input placeholder={placeholder} />;
+
+// const SearchInput = forwardRef(({ placeholder, value }: SearchInputProps, ref: ForwardedRef<HTMLInputElement>) => value ? <Input placeholder={placeholder} value={value} readOnly /> : <Input placeholder={placeholder} ref={ref}/>)
+
 
 export default SearchInput;
 

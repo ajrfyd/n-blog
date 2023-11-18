@@ -1,16 +1,23 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import ContentContainer from "../components/ContentContainer";
 import MDEditor from "@uiw/react-md-editor";
 import styled from "styled-components";
+import axios from "axios";
+import { v4 as uuid } from "uuid";
 import usePathName from "../lib/hooks/usePathName";
 import PostBottom from './PostBottom';
 import PostTop from './PostTop';
 import CustomButton from "../components/CustomButton";
 import CreatableSelect from "react-select/creatable";
 import { Input } from "../components/SearchInput";
-import { v4 as uuid } from "uuid";
-import axios from "axios";
 import { Tags } from "../ types/postTypes";
+import { notify } from "../stroe/notify";
+import { useNavigate } from "react-router-dom";
+import { usePostsData } from "../lib/hooks/useStore";
+import { useDispatch } from "react-redux";
+// import posts, { getPostsData } from "../stroe/posts";
+import { useSelector } from "react-redux";
+import { RootReducerType } from "../stroe";
 
 export type MdTagType = {
   id: string;
@@ -24,46 +31,58 @@ type PostType = {
 };
 
 // Todo - CreatableSelect 상태값 따로 관리
-// Todo - ref 사용? 
 type MdChangeType = (value?: string, e?: React.ChangeEvent<HTMLTextAreaElement>) => void;
 
 const PostLayout = () => {
   const [path] = usePathName();
   const [post, setPost] = useState<PostType>({ title: "", body: "", tags: [] });
+  const localTags = usePostsData("tags") as Tags[];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const posts = useSelector((state: RootReducerType) => state.posts);
 
+  // console.log(posts);
   const onChangText = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setPost(prev => ({ ...prev, title: e.target.value })), [post.title]);
   const onChangeBody = useCallback<MdChangeType>((value) => setPost(prev => ({...prev, body: value })), [post.body]);
-
+  
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if(post.title === "" || post.body === "") dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
     e.preventDefault();
-    // setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
-    const a = await axios("http://localhost:8080/posts/write", { data: { ...post, id: uuid(), createdAt: new Date(Date.now()) }, method: "post" });
-    console.log(a);
+    setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
+    const { data } = await axios("http://localhost:8080/posts/write", { data: { ...post, id: uuid(), createdAt: new Date(Date.now()) }, method: "post" });
+    data.status === 200 ? navigate("/posts", { replace: true }) : dispatch(notify("오류 발생!"));
   };
+  const a = useSelector((state: RootReducerType) => state.posts);
+  console.log(a);
+
+  useEffect(() => {
+  }, []);
 
   return (
     <ContentContainer>
       <FormContainer data-color-mode="light" onSubmit={onSubmit}>
-        <Title>{path === "write" ? "New" : "Edit"} Posts</Title>
+        <Title>
+          {path === "write" ? "New" : "Edit"} Posts
+        </Title>
         <PostTop>
-          <InputTitle 
+          <InputTitle
+            // ref={titleRef}
             type="text" 
             style={{ flex: 2 }} 
             placeholder="제목을 입력하세요."
             name="title"
             value={post.title}
             onChange={onChangText}
-            required
           />
           <div style={{ flex: 1 }}>
             <CreatableSelect
               isMulti
               onCreateOption={(label) => {
                 const newTag = { id: uuid(), label };
-                console.log(label, '< label')
+                console.log(label, '< label');
                 setPost(prev => ({...prev, tags: [newTag, ...prev.tags] }))
               }}
-              // options={post.map(tag => ({ label: tag.label, value: tag.id }))}
+              options={localTags.map(tag => ({ label: tag.label, value: tag.id }))}
               value={post.tags.map(tag => ({ label: tag.label, value: tag.id }))}
               // onChange={(tag) => {
               //   setPost(post.map(p => ))
@@ -78,13 +97,14 @@ const PostLayout = () => {
         />
         <PostBottom>
           <CustomButton 
-            onClick={console.log}
+            // onClick={() => {}}
+            type="submit"
             $bgColor="teal"
             color="#fff"
           >
             등록
           </CustomButton>
-          <CustomButton onClick={console.log}>취소</CustomButton>
+          <CustomButton onClick={() => navigate("/", { replace: true})}>취소</CustomButton>
         </PostBottom>
       </FormContainer>
     </ContentContainer>

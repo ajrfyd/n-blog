@@ -1,21 +1,47 @@
+import { useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import CustomButton from '../components/CustomButton';
 import IconMenu from "./IconMenu";
-import { BookOpenText, View, DoorOpen } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { BookOpenText, View, LucideGithub } from "lucide-react";
 import { notify } from "../stroe/notify";
 import { useDispatch } from "react-redux";
+import { oauthApi } from "../lib/api/api";
 
 const Header = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
+  let { search } = useLocation();
   const dispatch = useDispatch();
 
   const navNoticeHandler = (msg: string) => {
     dispatch(notify(msg));
-    navigation("/blogList");
+    navigate("/posts");
   };
 
+  const reqLogin = async (code: string) => {
+    const { data } = await oauthApi({
+      method: 'post',
+      url: `auth`,
+      headers: {
+        accept: 'application/json',
+      },
+      data: {
+        clientId: import.meta.env.VITE_GH_ID,
+        // client_secret: import.meta.env.VITE_GH_SECRET,
+        code
+      }
+    });
+
+    dispatch(notify(`${data.userId}님 환영합니다. (role: ${data.userId === "ajrfyd" ? "admin" : "user"})`));
+  };
+
+  useEffect(() => {
+    if(search === "") return;
+    const code = new URL(location.href).searchParams.get("code") as string;
+    reqLogin(code);
+    history.replaceState({}, "", location.pathname);
+  }, [search]);
+  
   return (
     <>
       <Block>
@@ -39,8 +65,11 @@ const Header = () => {
             >
                 <View />
             </CustomButton>
-            <CustomButton $isIcon onClick={() => dispatch(notify("로그인 준비중입니다."))}>
-              <DoorOpen />
+            <CustomButton 
+              $isIcon
+              onClick={() => location.href = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`}
+            >
+              <LucideGithub />
             </CustomButton>
           </IconMenu>
         </Inner>

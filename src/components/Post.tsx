@@ -1,46 +1,32 @@
-import styled from "styled-components";
-import { Tags } from "../ types/postTypes";
-import CustomButton from "./CustomButton";
+import MDEditor from "@uiw/react-md-editor";
+import { useLocation } from "react-router-dom";
+import ContentContainer from "./ContentContainer";
+import SearchLayout from "../layouts/SearchLayout";
+// import styled from "styled-components";
 
-type PostPropsType = {
-  title: string;
-  tags: Tags[];
-};
+const Post = () => {
+  const { state } = useLocation();
 
-// Todo - title 말줄임 혹은 예쁘게
-
-const Post = ({ title, tags }: PostPropsType) => {
   return (
-    <Container>
-      <Title>{title}</Title>
-      <TagContainer>
-        {
-          tags.map(tag => <CustomButton key={tag.id} size="sm" onClick={console.log}>{tag.label}</CustomButton>)
-        }
-      </TagContainer>
-    </Container>
+    <ContentContainer>
+      <SearchLayout 
+        $hasMargin 
+      />
+      <MDEditor.Markdown
+        source={state.body} 
+        style={{ 
+          whiteSpace: 'pre-wrap', 
+          minHeight: "300px", 
+          borderRadius: "5px", 
+          padding: "4rem 1rem",
+          background: "var(--white)",
+          color: "var(--teal)"
+        }}
+      />
+
+    </ContentContainer>
   )
 }
 
 export default Post;
 
-const Container = styled.div`
-  width: 100%;
-  cursor: pointer;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-`;
-const Title = styled.h3`
-  color: ${({ theme }) => theme.themes.color.teal};
-  margin-bottom: 1rem;
-`;
-const TagContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
-// const Tag = styled.li``;

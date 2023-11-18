@@ -6,7 +6,7 @@ type CustomButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   // children: React.ReactNode;
   color?: string;
   size?: "lg" | "sm" | "md";
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   $isIcon?: boolean;
   $bgColor?: string;
 };
