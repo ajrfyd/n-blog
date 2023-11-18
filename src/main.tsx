@@ -13,6 +13,7 @@ import './index.css';
 
 const l: Middleware = (store) => (next) => (action) => {
   // console.log(action, store.getState(), "<< prev store");
+  store.getState();
   const result = next(action);
   // console.log(action, store.getState(), "<< next store");
   return result;
