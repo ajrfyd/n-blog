@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { ChildrenProp } from '../ types/propsTypes';
 
-type FooterProps = ChildrenProp & {};
+type GridLayoutProps = ChildrenProp & {};
 
-const GridLayout = ({ children }: FooterProps) => {
+const GridLayout = ({ children }: GridLayoutProps) => {
 
   return (
     <GridContainer>
