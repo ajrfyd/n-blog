@@ -3,15 +3,19 @@ import styled from "styled-components";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import CustomButton from '../components/CustomButton';
 import IconMenu from "./IconMenu";
-import { BookOpenText, View, LucideGithub } from "lucide-react";
+import { BookOpenText, View, LucideGithub, LucideLogOut } from "lucide-react";
 import { notify } from "../stroe/notify";
 import { useDispatch } from "react-redux";
+import useUserState from '../lib/hooks/useLogin';
 import { oauthApi } from "../lib/api/api";
 
 const Header = () => {
   const navigate = useNavigate();
   let { search } = useLocation();
   const dispatch = useDispatch();
+
+  const [user, setUser] = useUserState();
+  console.log(user);
 
   const navNoticeHandler = (msg: string) => {
     dispatch(notify(msg));
@@ -32,7 +36,13 @@ const Header = () => {
       }
     });
 
+    setUser({ name: data.userId, role: data.userId === "ajrfyd" ? "admin" : "user" });
     dispatch(notify(`${data.userId}님 환영합니다. (role: ${data.userId === "ajrfyd" ? "admin" : "user"})`));
+  };
+
+  const logOutHandler = () => {
+    dispatch(notify("로그아웃 되었습니다."))
+    setUser(null);
   };
 
   useEffect(() => {
@@ -67,9 +77,14 @@ const Header = () => {
             </CustomButton>
             <CustomButton 
               $isIcon
-              onClick={() => location.href = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`}
+              onClick={
+                user ? () => logOutHandler()
+                : () => location.href = `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`
+              }
             >
-              <LucideGithub />
+              {
+                user ? <LucideLogOut/> : <LucideGithub />
+              }
             </CustomButton>
           </IconMenu>
         </Inner>
