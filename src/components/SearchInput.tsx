@@ -1,11 +1,13 @@
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 type SearchInputProps = {
   placeholder?: string;
   value?: string;
+  setTitleHandler: (value:string) => void;
 };
 
-const SearchInput = ({ placeholder, value }: SearchInputProps) => value ? <Input placeholder={placeholder} value={value} readOnly /> : <Input placeholder={placeholder} />;
+const SearchInput = ({ placeholder, value, setTitleHandler }: SearchInputProps) => <Input placeholder={placeholder} value={value} onChange={(e: ChangeEvent<HTMLInputElement>) => setTitleHandler(e.target.value)}/>;
 
 // const SearchInput = forwardRef(({ placeholder, value }: SearchInputProps, ref: ForwardedRef<HTMLInputElement>) => value ? <Input placeholder={placeholder} value={value} readOnly /> : <Input placeholder={placeholder} ref={ref}/>)
 
