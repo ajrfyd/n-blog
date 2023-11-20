@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ReactSelect from "react-select";
-import SearchInput from "../components/SearchInput";
+// import SearchInput from "../components/SearchInput";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { usePostsData } from "../lib/hooks/useStore";
@@ -58,7 +58,11 @@ const SearchLayout = ({ $hasMargin }: SearchSectionProps) => {
         {
           location === "posts" ? <label htmlFor="">제목 검색</label> : null
         }
-        <SearchInput placeholder={`${location === 'posts' ? "제목 검색" : ""}`} value={`${state ? state.title : "" }`}/>
+        {/* <SearchInput 
+          placeholder={`${location === 'posts' ? "제목 검색" : ""}`}
+
+          value={`${state ? state.title : "" }`}
+        /> */}
       </div>
       <div style={{ display: "flex", flexDirection: "column", flex: 1, gap: "10px" }}>
         {
