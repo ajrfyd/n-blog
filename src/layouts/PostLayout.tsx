@@ -16,8 +16,6 @@ import { useNavigate } from "react-router-dom";
 import { usePostsData } from "../lib/hooks/useStore";
 import { useDispatch } from "react-redux";
 // import posts, { getPostsData } from "../stroe/posts";
-import { useSelector } from "react-redux";
-import { RootReducerType } from "../stroe";
 
 export type MdTagType = {
   id: string;
