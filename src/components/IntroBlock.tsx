@@ -23,15 +23,13 @@ const Block = styled.div<IntoroBlockProps>`
   height: 60vh;
   display: flex;
   align-items: flex-end;
-  /* border: 1px solid red; */
   overflow: hidden;
   margin-top: 5rem;
   
   p {
     color: var(--teal);
     font-size: 3rem;
-    /* border: 1px solid red; */
-    width: 100%;
+    width: max-content;
     position: absolute;
 
     text-align: ${({ $rTl }) => $rTl ? "center" : ""};

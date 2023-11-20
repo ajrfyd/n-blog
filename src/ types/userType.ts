@@ -1,4 +1,4 @@
-export type UserRole = "user" | "admin" | null;
+export type UserRole = "user" | "admin";
 
 export type UserStateType = {
   name: string;

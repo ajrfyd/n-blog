@@ -47,13 +47,12 @@ const PostLayout = () => {
   
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if(post.title === "" || post.body === "") dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
+    console.log("z");
     e.preventDefault();
     setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
     const { data } = await axios("http://localhost:8080/posts/write", { data: { ...post, id: uuid(), createdAt: new Date(Date.now()) }, method: "post" });
     data.status === 200 ? navigate("/posts", { replace: true }) : dispatch(notify("오류 발생!"));
   };
-  const a = useSelector((state: RootReducerType) => state.posts);
-  console.log(a);
 
   useEffect(() => {
   }, []);

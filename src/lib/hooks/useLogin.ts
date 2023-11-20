@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { UserStateType } from "../../ types/userType";
 
-const useUserState = (userInfo?: Pick<UserStateType, "name">) => {
+const useUserState = () => {
   const [user, setUser] = useState<UserStateType | null>(() => {
     const storage = localStorage.getItem("userState");
     return !storage ? null : JSON.parse(storage);
@@ -9,9 +9,9 @@ const useUserState = (userInfo?: Pick<UserStateType, "name">) => {
 
   useEffect(() => {
     localStorage.setItem("userState", JSON.stringify(user));
-  }, [user, userInfo]);
+  }, [user]);
 
-  return [user, setUser];
+  return [user, setUser] as [UserStateType, typeof setUser];
 };
 
 export default useUserState;
