@@ -10,12 +10,11 @@ import useUserState from '../lib/hooks/useLogin';
 import { oauthApi } from "../lib/api/api";
 
 const Header = () => {
-  const navigate = useNavigate();
-  let { search } = useLocation();
-  const dispatch = useDispatch();
-
   const [user, setUser] = useUserState();
-  console.log(user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let { search } = useLocation();
+
 
   const navNoticeHandler = (msg: string) => {
     dispatch(notify(msg));
