@@ -1,12 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
-  const pRef = useRef<HTMLParagraphElement | null>(null);
-
+  const introArr = ["JavaScript를 사랑하는 2년차 개발자 입니다.", "배우는 것에 두려움이 없습니다.", "JavaScript 기반 Front-end에 기술에 관심이 있습니다.", "Back-end에도 소홀하지 않습니다.", "JavaScript는 사랑입니다..."];
+  
   useEffect(() => {
     const animate = (item: HTMLElement) => {
       let x = 100;
@@ -35,34 +35,18 @@ const Main = () => {
 
   return (
     <Container>
-      <ParalSection>
-        <TargetP ref={pRef} className="target">
-          JavaScript를 사랑하는 2년차 개발자 입니다.
-        </TargetP>
-      </ParalSection>
-      <ParalSection>
-        <TargetP ref={pRef} className="target lTr">
-          배우는 것에 두려움이 없습니다.
-        </TargetP>
-      </ParalSection>
-      <ParalSection>
-        <TargetP ref={pRef} className="target">
-          JavaScript 기반 Front-end에 기술에 관심이 있습니다.
-        </TargetP>
-      </ParalSection>
-      <ParalSection>
-        <TargetP ref={pRef} className="target lTr">
-          Back-end에도 소홀하지 않습니다.
-        </TargetP>
-      </ParalSection>
-      <ParalSection>
-        <TargetP ref={pRef} className="target bTt">
-          JavaScript는 사랑입니다...
-        </TargetP>
-      </ParalSection>
+      {
+        introArr.map((text, idx, arr) => 
+          (
+            <ParalSection key={text}>
+              <TargetP className={`target ${idx % 2 ? "lTr" : ((idx % 2 === 1 || idx % 2 === 0) && arr.length - 1 === idx) ? "bTt" : ""}`}>{text}</TargetP>
+            </ParalSection>
+          )
+        )
+      }
     </Container>
   )
-}
+};
 
 export default Main;
 
@@ -71,6 +55,10 @@ const Container = styled.main`
   width: 98%;
   margin: 0 auto;
   /* overflow: hidden; */
+  /* min-height: min-content; */
+  height: 200%;
+  /* border: 5px solid red; */
+  padding-bottom: 1rem;
 `;
 
 const ParalSection = styled.section`
@@ -83,6 +71,7 @@ const ParalSection = styled.section`
   position: relative;
   padding-top: 15vw;
 
+
   &:nth-child(even) {
     /* margin-right: auto; */
     margin-left: 0;
@@ -94,6 +83,10 @@ const ParalSection = styled.section`
     margin-left: 5vw;
     text-align: left;
   }
+
+  /* &:last-child() {
+    padding-top: 0;
+  } */
 `;
 
 const TargetP = styled.p`
@@ -101,7 +94,7 @@ const TargetP = styled.p`
   line-height: 1.4;
   margin-top: -5vw;
   margin-left: -4vw;
-  z-index: 100;
+  /* z-index: 10; */
   position: relative;
   word-break: keep-all;
 `;
