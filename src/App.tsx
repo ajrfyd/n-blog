@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./layouts/Header";
 import Main from "./pages/Main";
@@ -7,6 +7,7 @@ import PostsMain from "./pages/PostsMain";
 import PostLayout from "./layouts/PostLayout";
 import Notification from './layouts/Notification';
 import Post from "./components/Post";
+import Loading from "./components/Loading";
 import NotFound from "./pages/NotFound";
 import useUserState from "./lib/hooks/useLogin";
 import { PenToolIcon } from "lucide-react";
@@ -16,9 +17,10 @@ import Test from "./Test";
 const App = () => {
   const [user] = useUserState();
   const navigate = useNavigate();
-  
+
   return (
     <React.Fragment>
+      <Suspense fallback={<Loading />}>
       <Header />
       <Routes>
         <Route path="/" element={<Main />}/>
@@ -41,6 +43,7 @@ const App = () => {
           </div>
         )
       }
+      </Suspense>
       {/* <BackDrop>children</BackDrop>  */}
     </React.Fragment>
   )

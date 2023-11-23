@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import ContentContainer from "../components/ContentContainer";
 import GridLayout from "../layouts/GridLayout";
 import GridItem from "../components/GridItem";
@@ -7,11 +7,9 @@ import Search from "../layouts/Search";
 import SearchInput from "../components/SearchInput";
 import styled from "styled-components";
 import ReactSelect from "react-select";
-import { getPostsApi } from "../lib/api/api";
 import { Tags } from "../ types/postTypes";
-import { setPostsData } from "../stroe/posts";
-import { useDispatch } from "react-redux";
-import { usePostsData } from "../lib/hooks/useStore";
+import { usePostsQuery } from '../lib/api/apiQueries';
+import Loading from "../components/Loading";
 
 export type PostType = {
   id: string;
@@ -19,31 +17,64 @@ export type PostType = {
   body: string;
   tags: Tags[];
   createdAt: Date;
-}
+};
+
+export type Tag = {
+  label: string;
+  value: string;
+};
+
+// Todo - posts & tags 따로 가져와
 
 const PostsMain = () => {
   // const [posts, setPosts] = useState<PostType[] | []>([]);
   // const [tags, seTags] = useState<Tags[] | []>([]);
+  // const [posts, setPosts] = useState<PostType[] | []>(data.posts);
   const [title, setTitle] = useState("");
-  const [tag, setTag] = useState<{ label: string, value: string } | null>(null);
-  const dispatch = useDispatch();
-  const posts = usePostsData("posts") as PostType[] | [];
-  const tags = usePostsData("tags") as Tags[] | [];
+  const [tag, setTag] = useState<Tag | null>(null);
+  const [req, _] = useState(true);
 
-  // Todo - react-query 변경
-  // Todo - posts & tags 같이 가져와
-  const getPosts = async() => {
-    const { data }  = await getPostsApi({ method: "get", url: "posts" });
-    // setPosts(data.posts);
-    dispatch(setPostsData({ posts: data.posts, tags: data.tags }));
+  // console.log(req, setReq);
+  // console.log("PostsMain Page Render");
+
+  const { data, isLoading } = usePostsQuery(title, tag, req);
+
+  const setTitleHandler = (title: string) => {
+    if(tag) {
+      setTag(null);
+    }
+    setTitle(title);
   };
 
-  useEffect(() => {
-    getPosts();
-  }, []);
+  const setTagHandler = (tag: unknown) => {
+    setTag(tag as Tag);
+    setTitle("");
+    // setReq(true);
+    return [tag];
+  };
 
-  const setTitleHandler = (title: string) => setTitle(title);
-  const filteredData = useMemo(() => posts.filter(post => (title === "" || post.title.toLowerCase().includes(title.toLowerCase())) && (!tag?.label || post.tags.some(pTag => pTag.id === tag?.value))), [title, tag, posts]);
+  // useEffect(() => {
+  //   if(title === "") return;
+  //   setTimeout(() => setReq(true), 1000);
+  //   // console.log(tag, ">>>>>>");
+  // }, [title]);
+
+  // useEffect(() => {
+  //   if(req) {
+  //     setTimeout(() => setReq(false), 1000);
+  //   }
+  // }, [req]);
+
+  // const { data } = usePostsQuery(setPostsToStore);
+  if(!data) return null;
+
+  // const posts = usePostsData("posts") as PostType[] | [];
+  // const tags = usePostsData("tags") as Tags[] | [];
+
+  // console.log("PostsMain Page Render");
+  
+
+  // const filteredData = useMemo(() => posts.filter(post => (title === "" || post.title.toLowerCase().includes(title.toLowerCase())) && (!tag?.label || post.tags.some(pTag => pTag.id === tag?.value))), [title, tag, posts]);
 
   return (
     <ContentContainer>
@@ -64,18 +95,23 @@ const PostsMain = () => {
           <SelectInput 
             placeholder="Tag 검색"
             value={tag}
-            options={
-              [{label: "", value: ""},...tags.map(tag => ({ value: tag.id, label: tag.label }))]
-            }
-            onChange={setTag}
+            options={[{ value: "all", label: "all" } ,...data.tags.map(tag=> ({ value: tag.id, label: tag.label }))]}
+            // options={
+            //   [{label: "", value: ""},...tags.map(tag => ({ value: tag.id, label: tag.label }))]
+            // }
+            onChange={setTagHandler}
           />
         </SearchTag>
       </Search>
       <GridLayout>
         {
-          filteredData.map(post => <GridItem key={post.id} $bgColor="white"><PostCard {...post}/></GridItem>)
+          // filteredData?.map(post => <GridItem key={post.id} $bgColor="white"><PostCard {...post}/></GridItem>)
+        }
+        {
+          data.posts.map(post => <GridItem key={post.id} $bgColor="white"><PostCard {...post}/></GridItem>)
         }
       </GridLayout>
+      { isLoading && <Loading /> }
     </ContentContainer>
   )
 }

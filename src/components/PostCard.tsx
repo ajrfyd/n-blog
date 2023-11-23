@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { Tags } from "../ types/postTypes";
 import CustomButton from "./CustomButton";
@@ -15,6 +16,7 @@ type PostPropsType = {
 
 const PostCard = ({ title, tags, id, body }: PostPropsType) => {
   const navigate = useNavigate();
+  // console.log("PostCard render");
 
   return (
     <Container onClick={() => navigate(`/post/${id}`, { state: { body, id, title, tags }})}>
@@ -30,7 +32,7 @@ const PostCard = ({ title, tags, id, body }: PostPropsType) => {
   )
 }
 
-export default PostCard;
+export default React.memo(PostCard);
 
 const Container = styled.div`
   width: 100%;

@@ -7,7 +7,6 @@ type ItemProps = {
 };
 
 const GridItem: FC<ItemProps> = ({ children, $bgColor }: ItemProps) => {
-
   return (
     <Item $bgColor={$bgColor}>
       { children }

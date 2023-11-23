@@ -15,6 +15,7 @@ import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
 import { usePostsData } from "../lib/hooks/useStore";
 import { useDispatch } from "react-redux";
+import useUserState from "../lib/hooks/useLogin";
 // import posts, { getPostsData } from "../stroe/posts";
 
 export type MdTagType = {
@@ -35,6 +36,7 @@ const PostLayout = () => {
   const [path] = usePathName();
   const [post, setPost] = useState<PostType>({ title: "", body: "", tags: [] });
   const localTags = usePostsData("tags") as Tags[];
+  const [user] = useUserState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const posts = useSelector((state: RootReducerType) => state.posts);
@@ -53,7 +55,11 @@ const PostLayout = () => {
   };
 
   useEffect(() => {
-  }, []);
+    if(!user || (user && user.role !== "admin")) {
+      dispatch(notify("권한이 없습니다."));
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <ContentContainer>

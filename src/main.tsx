@@ -8,6 +8,8 @@ import rootReducer from './stroe/index.ts';
 import { legacy_createStore as createStore, applyMiddleware, Middleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { composeWithDevTools } from "redux-devtools-extension"
 import './index.css';
 
@@ -20,15 +22,19 @@ const l: Middleware = (store) => (next) => (action) => {
 }
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, l)));
+const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <GlobalStyles />
-        <ThemeProvider theme={{ themes }}>
-          <App /> 
-        </ThemeProvider>
-    </BrowserRouter>
-  </Provider>
+  <QueryClientProvider client={client}>
+    <ReactQueryDevtools/>
+    <Provider store={store}>
+      <BrowserRouter>
+        <GlobalStyles />
+          <ThemeProvider theme={{ themes }}>
+            <App /> 
+          </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
+  </QueryClientProvider>
 )
 
