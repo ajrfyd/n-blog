@@ -18,7 +18,7 @@ import { Tag } from "../../pages/PostsMain";
 // };
 
 
-export const usePostsQuery = (title: string = "", tag: Tag | null, req?: boolean) => {
+export const usePostsQuery = (title: string = "", tag: Tag | null) => {
   // const reqFn = (title === "" && tag) ? () => getPostsByTag(tag.value) : getPostsData;
 
   const { data, isLoading, error } = useQuery<toBeSavedPostsType>({

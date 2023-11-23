@@ -32,12 +32,12 @@ const PostsMain = () => {
   // const [posts, setPosts] = useState<PostType[] | []>(data.posts);
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState<Tag | null>(null);
-  const [req, _] = useState(true);
+  // const [req, _] = useState(true);
 
   // console.log(req, setReq);
   // console.log("PostsMain Page Render");
 
-  const { data, isLoading } = usePostsQuery(title, tag, req);
+  const { data, isLoading } = usePostsQuery(title, tag);
 
   const setTitleHandler = (title: string) => {
     if(tag) {
