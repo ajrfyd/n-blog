@@ -1,34 +1,52 @@
+import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 import { useLocation } from "react-router-dom";
 import ContentContainer from "./ContentContainer";
 import Search from "../layouts/Search";
 import SearchInput from "./SearchInput";
+import Loading from "./Loading";
 import { SelectInput } from "../pages/PostsMain";
 import { FlexCol } from "../pages/PostsMain";
-import styled from "styled-components";
+import { getPostByIdApi } from "../lib/api/api";
+import { useQuery } from '@tanstack/react-query';
 
 const Post = () => {
   const { state } = useLocation();
+  
+  const getPostHandler = async () => {
+    const { data } = await getPostByIdApi(state.id);
+    return data;
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["postById", state.id],
+    queryFn: getPostHandler
+  });
+
+  // console.log("Post render");
+
+  if(!data) return null;
+  if(isLoading) return <Loading />
 
   return (
     <ContentContainer>
       <Search $hasMargin>
         <SearchInputSection>
           <SearchInput
-            value={state.title}
+            value={data.post.title}
             setTitleHandler={() => {}}
           />
         </SearchInputSection>
         <TagSelectSection>
           <SelectInput
             options={
-              state.tags.map((tag: { label: string, id: string }) => ({ label: tag.label, value: tag.id }))
+              data.post.tags.map((tag: { label: string, id: string }) => ({ label: tag.label, value: tag.id }))
             }
           />  
         </TagSelectSection>
       </Search>
       <MDEditor.Markdown
-        source={state.body} 
+        source={data.post.body} 
         style={{ 
           whiteSpace: 'pre-wrap', 
           minHeight: "300px", 
