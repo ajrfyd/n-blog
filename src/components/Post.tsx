@@ -14,11 +14,11 @@ import { useState, useEffect } from "react";
 import CreatableSelect from 'react-select/creatable';
 import { v4 as uuid } from 'uuid';
 import { useAllTagsQuery, usePostQuery } from "../lib/api/apiQueries";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { ServerTagType } from "../ types/postTypes";
 import { useDispatch } from "react-redux";
 import { notify } from "../stroe/notify";
+import { updatePost } from '../lib/api/api';
 
 const Post = () => {
   const { state } = useLocation();
@@ -44,9 +44,10 @@ const Post = () => {
       tags
     };
 
-    const { status, data: { message } } = await axios.post("http://localhost:8080/posts/update", {
+    const { status, data: { message } } = await updatePost.post("/update", {
       data
     });
+
     if(status === 200) {
       navigate("/posts");
     } else {

@@ -9,6 +9,7 @@ const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL } = import.meta.env;
 const getPostsUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const getTagsUrl = VITE_ENV === "development" ? VITE_DEV_URL + "tags" : VITE_PROD_URL + "tags";
 const oauthLoginUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
+const baseUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 
 // type ResponseType<T> = AxiosResponse<T> & {
 //   data: T;
@@ -70,9 +71,13 @@ export const getTagsApi = async() => {
   const getTags = await axios.create({
     baseURL: getTagsUrl
   });
+
   return getTags.get("/");
 };
 
+export const updatePost = axios.create({
+  baseURL: baseUrl + "posts"
+});
 
 
 
