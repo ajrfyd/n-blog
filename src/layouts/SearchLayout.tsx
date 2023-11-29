@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { usePostsData } from "../lib/hooks/useStore";
 import { setTagsOption } from "../lib/utils";
-import { Tags } from "../ types/postTypes";
+import { ServerTagType } from "../ types/postTypes";
 
 type SearchSectionProps = React.InputHTMLAttributes<HTMLInputElement> & {
   $hasMargin?: boolean;
@@ -17,41 +17,12 @@ type SearchSectionProps = React.InputHTMLAttributes<HTMLInputElement> & {
 const SearchLayout = ({ $hasMargin }: SearchSectionProps) => {
   let { pathname, state } = useLocation();
   const [location, setLocation] = useState("posts");
-  const localTags = usePostsData("tags") as Tags[];
-
+  const localTags = usePostsData("tags") as ServerTagType[];
+  console.log(pathname);
   useEffect(() => {
     pathname === "/posts" ? null : setLocation(pathname);
   }, []);
-  // return (
-  //   <SearchSectionContainer $hasMargin={$hasMargin}>
-  //     {
-  //       location === "posts" ? (
-  //         <>
-  //           <div style={{ display: "flex", flexDirection: "column", flex: 2, gap: "10px"}}>
-  //             <label htmlFor="">제목 검색</label>
-  //             <SearchInput placeholder="제목 검색"/>
-  //           </div>
-  //           <div style={{ display: "flex", flexDirection: "column", flex: 1, gap: "10px" }}>
-  //             <label htmlFor="">Tag 검색</label>
-  //             <SelectInput placeholder="Tag 검색" isMulti/>
-  //           </div>
-  //         </>
-  //       ) : (
-  //         <>
-  //           <div style={{ display: "flex", flexDirection: "column", flex: 2, gap: "10px"}}>
-  //             {/* <label htmlFor="">제목 검색</label> */}
-  //             {/* <input type="text" placeholder="제목 검색" style={{ backgroundColor: "hsl(0, 0%, 100%)", paddingLeft: "1rem", borderStyle: "solid", height: "100%", borderColor: "hsl(0, 0%, 80%)", borderRadius: "5px" }}/> */}
-  //             <SearchInput placeholder="제목" />
-  //           </div>
-  //           <div style={{ display: "flex", flexDirection: "column", flex: 1, gap: "10px" }}>
-  //             {/* <label htmlFor="">Tag 검색</label> */}
-  //             <SelectInput placeholder="Tags" isMulti/>
-  //           </div>
-  //         </>
-  //       )
-  //     }
-  //   </SearchSectionContainer>
-  // )
+  
   return (
     <SearchSectionContainer $hasMargin={$hasMargin}>
       <div style={{ display: "flex", flexDirection: "column", flex: 2, gap: "10px"}}>

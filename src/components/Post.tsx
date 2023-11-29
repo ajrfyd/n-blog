@@ -32,7 +32,7 @@ const Post = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { data: post , isLoading, error, isFetching, isPending } = usePostQuery(state.id, isRender);
+  const { data: post , isLoading, error } = usePostQuery(state.id, isRender);
 
   const [savedTags] = useAllTagsQuery(isModify);
   
