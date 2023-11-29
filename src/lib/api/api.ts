@@ -1,12 +1,18 @@
 import axios from "axios";
 // InternalAxiosRequestConfig
 import { StateType } from "../../stroe/posts";
+import { PostType } from "../../ types/postTypes";
 
 // const env = import.meta.env.VITE_ENV;
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL } = import.meta.env;
 
 const getPostsUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
+const getTagsUrl = VITE_ENV === "development" ? VITE_DEV_URL + "tags" : VITE_PROD_URL + "tags";
 const oauthLoginUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
+
+// type ResponseType<T> = AxiosResponse<T> & {
+//   data: T;
+// };
 
 export const getPostsApi = axios.create({
   method: "get",
@@ -29,12 +35,11 @@ export const getPostsData = async<T = StateType>(): Promise<T> => {
 
 export const getPostsByTag = async<T = StateType>(id: string): Promise<T> => {
   const { data } = await getPostByTagApi(id);
-  console.log(data);
   return data;
 };
 
-const getPostByTagApi = (id: string) => {
-  const postByTag = axios.create({
+const getPostByTagApi = async(id: string) => {
+  const postByTag = await axios.create({
     baseURL: getPostsUrl + `posts/tag/${id}`
   });
   postByTag.interceptors.response.use(
@@ -43,21 +48,35 @@ const getPostByTagApi = (id: string) => {
   return postByTag.get("/");
 };
 
-export const getPostByIdApi = (id: string) => {
-  const postById = axios.create({
+type ResponseType<T> = {
+  status: number;
+  message: string;
+  post: T;
+};
+
+export const getPostByIdApi = async (id: string): Promise<ResponseType<PostType>> => {
+  const postById = await axios.create({
     baseURL: getPostsUrl + `posts/${id}`,
   });
 
-  postById.interceptors.request.use(
-    (a) => (a),
-  );
-
   postById.interceptors.response.use(
-    (a) => (console.log(a), a)
+    ({ data }) => (data)
   );
 
   return postById.get("/");
-}
+};
+
+export const getTagsApi = async() => {
+  const getTags = await axios.create({
+    baseURL: getTagsUrl
+  });
+  return getTags.get("/");
+};
+
+
+
+
+
 
 // const getOauthAxios = (token: string) => {
 //   const oautAxios = axios.create({

@@ -1,4 +1,4 @@
-export type Tags = {
+export type ServerTagType = {
   id: string;
   label: string;
 };
@@ -7,6 +7,6 @@ export type PostType = {
   id: string;
   title: string;
   body: string;
-  tags: Tags[];
+  tags: ServerTagType[];
   createdAt: Date;
 };

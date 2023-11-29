@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Tags } from "../ types/postTypes";
+import { ServerTagType } from "../ types/postTypes";
 import CustomButton from "./CustomButton";
 import { useNavigate } from "react-router-dom";
 
 type PostPropsType = {
   title: string;
-  tags: Tags[];
+  tags: ServerTagType[];
   id: string;
   body: string;
 };
