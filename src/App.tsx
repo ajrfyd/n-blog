@@ -32,7 +32,7 @@ const App = () => {
       </Routes>
       <Notification />
       {
-        (user && user.name === "ajrfyd") && (
+        (user && (user.name === "ajrfyd" && user.role === 'admin')) && (
           <div style={{ position: "fixed", right: "2rem", bottom: "2rem" }}>
             <CustomButton 
               $isIcon

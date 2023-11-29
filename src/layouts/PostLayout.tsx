@@ -10,7 +10,7 @@ import PostTop from './PostTop';
 import CustomButton from "../components/CustomButton";
 import CreatableSelect from "react-select/creatable";
 import { Input } from "../components/SearchInput";
-import { Tags } from "../ types/postTypes";
+import { ServerTagType } from "../ types/postTypes";
 import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
 import { usePostsData } from "../lib/hooks/useStore";
@@ -26,7 +26,7 @@ export type MdTagType = {
 type PostType = {
   title: string;
   body: string | undefined;
-  tags: Tags[];
+  tags: ServerTagType[];
 };
 
 // Todo - CreatableSelect 상태값 따로 관리
@@ -35,7 +35,8 @@ type MdChangeType = (value?: string, e?: React.ChangeEvent<HTMLTextAreaElement>)
 const PostLayout = () => {
   const [path] = usePathName();
   const [post, setPost] = useState<PostType>({ title: "", body: "", tags: [] });
-  const localTags = usePostsData("tags") as Tags[];
+  // Todo localTags 처리 요망! Because changed server query
+  const localTags = usePostsData("tags") as ServerTagType[];
   const [user] = useUserState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,7 +48,6 @@ const PostLayout = () => {
   
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     if(post.title === "" || post.body === "") dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
-    console.log("z");
     e.preventDefault();
     setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
     const { data } = await axios("http://localhost:8080/posts/write", { data: { ...post, id: uuid(), createdAt: new Date(Date.now()) }, method: "post" });

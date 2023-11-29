@@ -7,7 +7,7 @@ import Search from "../layouts/Search";
 import SearchInput from "../components/SearchInput";
 import styled from "styled-components";
 import ReactSelect from "react-select";
-import { Tags } from "../ types/postTypes";
+import { ServerTagType } from "../ types/postTypes";
 import { usePostsQuery } from '../lib/api/apiQueries';
 import Loading from "../components/Loading";
 
@@ -15,7 +15,7 @@ export type PostType = {
   id: string;
   title: string;
   body: string;
-  tags: Tags[];
+  tags: ServerTagType[];
   createdAt: Date;
 };
 
@@ -38,7 +38,7 @@ const PostsMain = () => {
   // console.log("PostsMain Page Render");
 
   const { data, isLoading } = usePostsQuery(title, tag);
-
+  
   const setTitleHandler = (title: string) => {
     if(tag) {
       setTag(null);
