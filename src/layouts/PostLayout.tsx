@@ -81,6 +81,7 @@ const PostLayout = () => {
             <CreatableSelect
               isMulti
               onCreateOption={(label) => {
+                console.log(label)
                 const newTag = { id: uuid(), label };
                 console.log(label, '< label');
                 setPost(prev => ({...prev, tags: [newTag, ...prev.tags] }))
@@ -90,6 +91,7 @@ const PostLayout = () => {
               // onChange={(tag) => {
               //   setPost(post.map(p => ))
               // }}
+              onChange={a => console.log(a, "asdasdas")}
             />
           </div>
         </PostTop>

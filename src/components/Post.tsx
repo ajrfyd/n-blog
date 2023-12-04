@@ -13,6 +13,7 @@ import CustomButton from './CustomButton';
 import { useState, useEffect } from "react";
 import CreatableSelect from 'react-select/creatable';
 import { v4 as uuid } from 'uuid';
+import { Undo2Icon } from "lucide-react"
 import { useAllTagsQuery, usePostQuery } from "../lib/api/apiQueries";
 import { useParams } from "react-router-dom";
 import { ServerTagType } from "../ types/postTypes";
@@ -161,6 +162,17 @@ const Post = () => {
           </PostBottom>
         )
       }
+      <CustomButton 
+        $isIcon
+        style={{ 
+          position: "absolute", 
+          left: "2rem", 
+          bottom: "2rem" 
+        }}
+        onClick={() => navigate(-1)}
+      >
+        <Undo2Icon />
+      </CustomButton>
     </ContentContainer>
   )
 }
