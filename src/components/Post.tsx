@@ -165,7 +165,7 @@ const Post = () => {
       <CustomButton 
         $isIcon
         style={{ 
-          position: "absolute", 
+          position: "fixed", 
           left: "2rem", 
           bottom: "2rem" 
         }}
