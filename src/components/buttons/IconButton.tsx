@@ -4,12 +4,13 @@ import React from "react";
 type PropsType = {
   children: React.ReactNode;
   onClick?: () => void;
+  style?: React.CSSProperties;
 };
 
-const Iconbutton = ({ children, onClick }: PropsType) => {
+const Iconbutton = ({ children, onClick, style }: PropsType) => {
 
   return (
-    <IconBtn onClick={onClick}>
+    <IconBtn onClick={onClick} style={style}>
       { children }
     </IconBtn>
   )

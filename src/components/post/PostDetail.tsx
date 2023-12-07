@@ -5,23 +5,25 @@ import MtContainer from "../common/MtContainer";
 import MainTitle from '../common/MainTitle';
 import MDEditor from "@uiw/react-md-editor";
 import { Container } from "react-bootstrap";
-
+import Iconbutton from '../buttons/IconButton';
+import { Undo2Icon } from "lucide-react";
 
 const PostDetail = () => {
   const { id } = useParams();
   const { data: post } = usePostQuery(id as string, true);
-  
+
   return (
-    <MtContainer>
+    <MtContainer >
       <Banner>
         <MainTitle>Welcome!</MainTitle>
       </Banner>
       {
         post && (
-          <Container>
+          <Container >
             <MDEditor.Markdown 
             source={post.body} 
-            style={{ 
+            style={{
+              marginTop: "1rem",
               whiteSpace: 'pre-wrap', 
               minHeight: "300px", 
               borderRadius: "5px", 
@@ -33,6 +35,10 @@ const PostDetail = () => {
           </Container>
         )
       }
+      <Iconbutton 
+        style={{ position: "fixed", bottom: "2rem", left: "1.5rem" }}>
+        <Undo2Icon />
+      </Iconbutton>
     </MtContainer>
   )
 }
