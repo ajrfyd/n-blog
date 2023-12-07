@@ -14,6 +14,7 @@ const GlobalStyles = createGlobalStyle`
     --beige: #F7E2D6;
     --teal: #9DD6DF;
     --purple: #A084CF;
+    --white: #f2f2f2;
   }
 
   @font-face {

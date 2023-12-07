@@ -24,8 +24,10 @@ const PostListPage = () => {
   return (
     <MtContainer>
       <Banner >
-        <MainTitle>hk's Blog</MainTitle>
-        <SubP style={{ color: "var(--purple)", marginTop: "2rem" }}>Welcom my page!</SubP>
+        <MainTitle
+          $isShadow
+        >hk's Blog</MainTitle>
+        <SubP style={{ marginTop: "2rem" }}>Welcom my page!</SubP>
       </Banner>
       {
         data && (

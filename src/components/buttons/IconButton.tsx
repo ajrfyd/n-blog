@@ -19,9 +19,18 @@ export default Iconbutton;
 
 const IconBtn = styled.button`
   padding: .2rem .5rem;
-  border: 2px solid red;
-  border-radius: 5px;
+  border: 2px solid var(--brown);
+  border-radius: 2rem;
   position: relative;
+
+  &:hover {
+    border: 2px solid var(--purple);
+    color: #075ACA;
+  }
+  
+  &:active {
+    transform: scale(1.1);
+  }
 
   & + & {
     margin-left: .5rem;

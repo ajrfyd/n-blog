@@ -18,5 +18,5 @@ const SubP = ({ children, style }: SubPProps) => {
 export default SubP;
 
 const P = styled.p`
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;

@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes} from "styled-components";
 import { useState, useEffect } from "react";
 import { AlertTriangle } from "lucide-react";
 
@@ -35,7 +35,6 @@ const fadeInLeft = keyframes`
     transform: translateX(0);
   }
 `;
-
 
 const Container = styled.div`
   font-weight: bold;
