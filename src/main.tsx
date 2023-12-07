@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
-import GlobalStyles from './GlobalStyles.ts';
+import GlobalStyles from './lib/styles/GlobalStyles.ts';
 import { ThemeProvider } from 'styled-components';
 import { themes } from './lib/styles/themes.ts';
 import rootReducer from './stroe/index.ts';
@@ -11,7 +11,9 @@ import thunk from 'redux-thunk';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { composeWithDevTools } from "redux-devtools-extension"
-import './index.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// import './index.css';
 
 const l: Middleware = (store) => (next) => (action) => {
   // console.log(action, store.getState(), "<< prev store");
@@ -30,9 +32,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <BrowserRouter>
         <GlobalStyles />
-          <ThemeProvider theme={{ themes }}>
-            <App /> 
-          </ThemeProvider>
+        <ThemeProvider theme={{ themes }}>
+          <App /> 
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </QueryClientProvider>
