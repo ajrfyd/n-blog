@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { usePostQuery } from "../../lib/api/apiQueries";
 import Banner from "../banner/Banner";
 import MtContainer from "../common/MtContainer";
@@ -11,6 +11,7 @@ import { Undo2Icon } from "lucide-react";
 const PostDetail = () => {
   const { id } = useParams();
   const { data: post } = usePostQuery(id as string, true);
+  const navigate = useNavigate();
 
   return (
     <MtContainer >
@@ -36,7 +37,9 @@ const PostDetail = () => {
         )
       }
       <Iconbutton 
-        style={{ position: "fixed", bottom: "2rem", left: "1.5rem" }}>
+        style={{ position: "fixed", bottom: "2rem", left: "1.5rem" }}
+        onClick={() => navigate(-1)}
+      >
         <Undo2Icon />
       </Iconbutton>
     </MtContainer>
