@@ -50,4 +50,9 @@ const CardContainer = styled(Card)`
     text-overflow: ellipsis;
     color: var(--purple);
   }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
+  }
 `;
