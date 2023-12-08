@@ -38,7 +38,7 @@ export const usePostsQuery = (title: string = "", tag: Tag | null) => {
     // select: afterFn
     select: (data) => {
       if(title !== "" && tag === null) return { tags: data.tags, posts: data.posts.filter(post => post.title.toLowerCase().includes(title.toLowerCase())) };
-      if(title === "" && tag && tag.label !== "all") {
+      if(title === "" && tag && tag.label !== "All") {
         const posts = data.posts.filter(post => post.tags.some(pTag => pTag.id === tag.value));
         return { posts, tags: data.tags };
       };
