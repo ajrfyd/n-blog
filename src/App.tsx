@@ -58,8 +58,6 @@ const App = () => {
     history.replaceState({}, "", location.pathname);
   }, [search]);
 
-  console.log(user);
-
   return (
     <React.Fragment>
       <Suspense fallback={<Loading />}>

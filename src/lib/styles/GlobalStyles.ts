@@ -49,6 +49,14 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
+  ul {
+    margin-bottom: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
   code {
     font-family: "Fira Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
   }
