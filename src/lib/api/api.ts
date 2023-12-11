@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 // InternalAxiosRequestConfig
 import { StateType } from "../../stroe/posts";
-import { PostType, ServerTagType } from "../../ types/postTypes";
+import { PostType } from "../../ types/postTypes";
 
 // const env = import.meta.env.VITE_ENV;
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL } = import.meta.env;

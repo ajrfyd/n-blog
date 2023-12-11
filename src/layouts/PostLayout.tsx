@@ -13,7 +13,7 @@ import { Input } from "../components/SearchInput";
 import { ServerTagType } from "../ types/postTypes";
 import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
-import { usePostsData } from "../lib/hooks/useStore";
+// import { usePostsData } from "../lib/hooks/useStore";
 import { useDispatch } from "react-redux";
 import useUserState from "../lib/hooks/useLogin";
 import { useAllTagsQuery } from "../lib/api/apiQueries";
@@ -38,7 +38,7 @@ const PostLayout = () => {
   const [path] = usePathName();
   const [post, setPost] = useState<PostType>({ title: "", body: "", tags: [] });
   // Todo localTags 처리 요망! Because changed server query
-  const localTags = usePostsData("tags") as ServerTagType[];
+  // const localTags = usePostsData("tags") as ServerTagType[];
   const [user] = useUserState();
   const dispatch = useDispatch();
   const navigate = useNavigate();
