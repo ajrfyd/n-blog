@@ -47,6 +47,8 @@ const CustomCategories = ({ tags, tagSearchHandler }: CategoriesProps) => {
     const { clientWidth } = sliderContainerRef.current;
     const { scrollWidth } = sliderRef.current;
     
+    const size = new ResizeObserver(entries => console.log(entries));
+    size.observe(sliderRef.current);
     //* 태그 이동 거리 계산
     stepRef.current = clientWidth / 2;
     

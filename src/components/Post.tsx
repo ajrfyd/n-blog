@@ -35,7 +35,7 @@ const Post = () => {
 
   const { data: post , isLoading, error } = usePostQuery(state.id, isRender);
 
-  const [savedTags] = useAllTagsQuery(isModify);
+  const savedTags = useAllTagsQuery(isModify);
   
   const submitHandler = async () => {
     const data = {
