@@ -13,7 +13,7 @@ import { Input } from "../components/SearchInput";
 import { ServerTagType } from "../ types/postTypes";
 import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
-import { usePostsData } from "../lib/hooks/useStore";
+// import { usePostsData } from "../lib/hooks/useStore";
 import { useDispatch } from "react-redux";
 import useUserState from "../lib/hooks/useLogin";
 import { useAllTagsQuery } from "../lib/api/apiQueries";
