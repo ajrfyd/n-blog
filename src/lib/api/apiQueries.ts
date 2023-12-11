@@ -60,5 +60,5 @@ export const useAllTagsQuery = (isModify: boolean) => {
     enabled: isModify
   });
 
-  return [data];
+  return data;
 };

@@ -7,11 +7,12 @@ import { notify } from "./stroe/notify";
 import Main from "./pages/Main";
 // import PostsMain from "./pages/PostsMain";
 // import BackDrop from './components/BackDrop';
-import PostLayout from "./layouts/PostLayout";
+import PostPage from "./pages/PostPage";
+// import PostLayout from "./layouts/PostLayout";
 import Notification from './components/notification/Notification';
 // import Post from "./components/Post";
 import Loading from "./components/Loading";
-import NotFound from "./pages/NotFound";
+import NotFound from "./components/page/NotFound";
 import useUserState from "./lib/hooks/useLogin";
 import { PenToolIcon } from "lucide-react";
 import CustomButton from './components/CustomButton';
@@ -73,7 +74,7 @@ const App = () => {
         <Route path="/posts" element={<PostListPage />}/>
         {/* <Route path="/post/:id" element={<Post/>}/> */}
         <Route path="/post/:id" element={<PostDetail/>}/>
-        <Route path="/write" element={<PostLayout />}/>
+        <Route path="/write" element={<PostPage />}/>
         <Route path="*" element={< NotFound/>}/>
       </Routes>
       <Notification />

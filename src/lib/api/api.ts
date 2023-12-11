@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 // InternalAxiosRequestConfig
 import { StateType } from "../../stroe/posts";
-import { PostType } from "../../ types/postTypes";
+import { PostType, ServerTagType } from "../../ types/postTypes";
 
 // const env = import.meta.env.VITE_ENV;
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL } = import.meta.env;
@@ -71,6 +71,8 @@ export const getTagsApi = async() => {
   const getTags = await axios.create({
     baseURL: getTagsUrl
   });
+
+  // getTags.interceptors.response.use(({ data }) => (console.log(data), data));
 
   return getTags.get("/");
 };

@@ -11,6 +11,7 @@ import MtContainer from "../components/common/MtContainer";
 import MainTitle from '../components/common/MainTitle';
 import SubP from '../components/common/SubP';
 import Loading from "../components/Loading";
+import NoResults from "../components/page/NoResults";
 
 const PostListPage = () => {
   const [title, _] = useState("");
@@ -36,11 +37,11 @@ const PostListPage = () => {
             <Container style={{ height: "100vh" }}>
               <GridItemContainer>
                 {
-                  data.posts.map(post => (
+                  data.posts.length >= 1 ? data.posts.map(post => (
                     <Col key={post.id}>
                       <PostCard post={post}/>
                     </Col>
-                  ))
+                  )) : <NoResults />
                 }
               </GridItemContainer>
             </Container>
