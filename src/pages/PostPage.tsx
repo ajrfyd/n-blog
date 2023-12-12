@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import ContentContainer from "../components/ContentContainer";
+import ContentContainer from "../components/post/ContentContainer";
 import MDEditor from "@uiw/react-md-editor";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
@@ -7,9 +7,9 @@ import axios from "axios";
 import usePathName from "../lib/hooks/usePathName";
 import BtnContainer from "../components/buttons/BtnContainer";
 import InputSelect from "../components/post/InputSelect";
-import CustomButton from "../components/CustomButton";
+import CustomButton from "../components/buttons/CustomButton";
 import CreatableSelect from "react-select/creatable";
-import { Input } from "../components/SearchInput";
+import { Input } from "../components/input/SearchInput";
 import { ServerTagType } from "../ types/postTypes";
 import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
