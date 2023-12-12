@@ -3,14 +3,14 @@ import { usePostsQuery } from "../lib/api/apiQueries";
 import { TagType } from "../ types/postTypes";
 import { Container, Col } from "react-bootstrap";
 import Banner from "../components/banner/Banner";
-import CustomCategories from "../components/post/CustomCategories";
+import Categories from "../components/post/Categories";
 import PostCard from "../components/post/PostCard";
 import GridItemContainer from "../components/common/GridItemContainer";
 
 import MtContainer from "../components/common/MtContainer";
 import MainTitle from '../components/common/MainTitle';
 import SubP from '../components/common/SubP';
-import Loading from "../components/Loading";
+import Loading from "../components/page/Loading";
 import NoResults from "../components/page/NoResults";
 
 const PostListPage = () => {
@@ -33,7 +33,7 @@ const PostListPage = () => {
       {
         data && (
           <>
-            <CustomCategories tags={data.tags} tagSearchHandler={tagSearchHandler}/>  
+            <Categories tags={data.tags} tagSearchHandler={tagSearchHandler}/>  
             <Container style={{ height: "100vh" }}>
               <GridItemContainer>
                 {

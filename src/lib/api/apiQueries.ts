@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPostsData, getTagsApi, getPostByIdApi } from "./api";
 import { toBeSavedPostsType } from "../../stroe/posts";
-import { Tag } from "../../pages/PostsMain";
 import { ServerTagType } from "../../ types/postTypes";
+import { TagType } from "../../ types/postTypes";
 
 // export const usePostQuery = (postId: string, isRender: boolean) => {
 
@@ -28,7 +28,7 @@ export const usePostQuery = (postId: string, isRender: boolean) => {
 };
 
 
-export const usePostsQuery = (title: string = "", tag: Tag | null) => {
+export const usePostsQuery = (title: string = "", tag: TagType | null) => {
   // const reqFn = (title === "" && tag) ? () => getPostsByTag(tag.value) : getPostsData;
 
   const { data, isLoading, error } = useQuery<toBeSavedPostsType>({

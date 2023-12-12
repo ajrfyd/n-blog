@@ -1,9 +1,9 @@
+import { useEffect, useRef, useState, useCallback } from "react";
 import { ServerTagType, TagType } from "../../ types/postTypes";
 import styled from "styled-components";
-import Iconbutton from "../buttons/IconButton";
+import ArrowButton from "../buttons/ArrowButton";
 import { ArrowBigLeftDashIcon, ArrowBigRightDashIcon } from "lucide-react";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
+import Tag from "./Tag";
 
 type CategoriesProps = {
   tags: ServerTagType[];
@@ -11,47 +11,92 @@ type CategoriesProps = {
 };
 
 const Categories = ({ tags, tagSearchHandler }: CategoriesProps) => {
+  const [tagPosition, setTagPosition] = useState(0);
+  // const [selectedTag, setSelectedTag] = useState("a8c69f24-d448-4d23-aef7-22f4b62415b5");
+  const [selectedTag, setSelectedTag] = useState(tags.filter(tag => tag.label === "All")[0].id);
 
-  const moveHandler = (to: "left" | "right") => {
-    console.log(to);
+  const sliderContainerRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLUListElement>(null);
+  const edgeRef = useRef(0);
+  const stepRef = useRef(0);
+
+  const moveRightHandler = () => {
+    const currentPos = tagPosition - stepRef.current;
+    
+    if(-currentPos > edgeRef.current) {
+      setTagPosition(-edgeRef.current);
+      return;
+    };
+
+    setTagPosition(prev => prev - stepRef.current);
   };
 
-  const num = 0;
+  const moveLeftHandler = () => {
+    const currentPos = tagPosition + stepRef.current;
+
+    if(currentPos >= 0) {
+      setTagPosition(0);
+      return;
+    }
+
+    setTagPosition(prev => prev + stepRef.current);
+  };
+
+  const translateTagHandler = useCallback((id: string) => {
+    const selectedTag = tags.filter((oTag) => oTag.id === id).map((tag) => ({ value: tag.id, label: tag.label }));
+    tagSearchHandler(selectedTag[0]);
+    setSelectedTag(id);
+  }, []);
+
+  useEffect(() => {
+    if(!sliderContainerRef.current || !sliderRef.current) return;
+    const { clientWidth } = sliderContainerRef.current;
+    const { scrollWidth } = sliderRef.current;
+    
+    const size = new ResizeObserver(entries => console.log(entries));
+    size.observe(sliderRef.current);
+    //* 태그 이동 거리 계산
+    stepRef.current = clientWidth / 2;
+    
+    //* 태그 컨테이너의 끝을 계산
+    edgeRef.current = scrollWidth - clientWidth;
+  }, []);
 
   return (
     <Container>
-      <Iconbutton onClick={() => moveHandler("left")}>
+      <ArrowButton onClick={moveLeftHandler}>
         <ArrowBigLeftDashIcon />
-      </Iconbutton>
-      <TabContainer>
-        <Tabs
-          variant="pills"
-          id="sel-tag"
-          transition
-          justify
-          defaultActiveKey={tags.filter(tag => tag.label === "All")[0].label}
-          onSelect={(id) => {
-            const tag = tags
-              .filter((tag) => tag.id === id)
-              .map((tag) => ({ value: tag.id, label: tag.label }));
-            tagSearchHandler(tag[0]);
-          }}
+      </ArrowButton>
+      <TabContainer ref={sliderContainerRef}>
+        <TabSlider
+          ref={sliderRef}
           style={{
-            flexWrap: "nowrap",
-            transform: `translateX(-${num}px)`
+            transform: `translateX(${tagPosition}px)`
+            // transform: `translateX(-${testRef.current})`
           }}
         >
-          {tags.map((tag) => (
-            <Tab key={tag.id} transition title={tag.label} eventKey={tag.id}>
-              {tag.label}
-            </Tab>
-          ))}
-        </Tabs>
+          {/* {
+            tags.map((tag) => (
+              <Tag 
+                key={tag.id} 
+                title={tag.label}
+                onClick={() => {
+                  const selectedTag = tags.filter((oTag) => oTag.id === tag.id).map((tag) => ({ value: tag.id, label: tag.label }));
+                  tagSearchHandler(selectedTag[0]);
+                }}
+              >
+                {tag.label}
+              </Tag>
+            ))
+          } */}
+          {
+            tags.map(tag => <Tag title={tag.label} key={tag.id} onClick={() => translateTagHandler(tag.id)} selected={tag.id === selectedTag}/>)
+          }
+        </TabSlider>
       </TabContainer>
-
-      <Iconbutton onClick={() => moveHandler("right")}>
+      <ArrowButton onClick={moveRightHandler}> 
         <ArrowBigRightDashIcon />
-      </Iconbutton>
+      </ArrowButton>
     </Container>
   );
 };
@@ -60,16 +105,22 @@ export default Categories;
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
   margin-top: 5px;
   padding: 0 2rem;
-
 `;
 
 const TabContainer = styled.div`
   overflow: hidden;
-  /* border: 2px solid red; */
+  
+  flex: 1;
+  /* justify-content: center; */
+  /* align-items: center; */
+`;
 
-  .tab-content {
-    display: none;
-  }
+const TabSlider = styled.ul`
+  display: flex;
+  padding-left: 0;
+  transition: .2s;
+  transition-delay: .1s;
 `;

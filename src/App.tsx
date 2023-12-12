@@ -11,11 +11,11 @@ import PostPage from "./pages/PostPage";
 // import PostLayout from "./layouts/PostLayout";
 import Notification from './components/notification/Notification';
 // import Post from "./components/Post";
-import Loading from "./components/Loading";
+import Loading from "./components/page/Loading";
 import NotFound from "./components/page/NotFound";
 import useUserState from "./lib/hooks/useLogin";
 import { PenToolIcon } from "lucide-react";
-import CustomButton from './components/CustomButton';
+import CustomButton from './components/buttons/CustomButton';
 import NavBar from "./components/nav/Navbar";
 import PostListPage from "./pages/PostListPage";
 import PostDetail from "./components/post/PostDetail";
@@ -72,7 +72,6 @@ const App = () => {
         <Route path="/" element={<Main />}/>
         {/* <Route path="/posts" element={<PostsMain />}/> */}
         <Route path="/posts" element={<PostListPage />}/>
-        {/* <Route path="/post/:id" element={<Post/>}/> */}
         <Route path="/post/:id" element={<PostDetail/>}/>
         <Route path="/write" element={<PostPage />}/>
         <Route path="*" element={< NotFound/>}/>
