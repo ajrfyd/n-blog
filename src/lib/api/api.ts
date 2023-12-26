@@ -3,13 +3,13 @@ import axios from "axios";
 import { StateType } from "../../stroe/posts";
 import { PostType, PostListType } from "../../ types/postTypes";
 // const env = import.meta.env.VITE_ENV;
-const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, VITE_API_URL } = import.meta.env;
+const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, VITE_KLOG_URL } = import.meta.env;
 
 const getPostsUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const getTagsUrl = VITE_ENV === "development" ? VITE_DEV_URL + "tags" : VITE_PROD_URL + "tags";
 const oauthLoginUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const baseUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
-const newAPIurl = VITE_API_URL;
+const newAPIurl = VITE_KLOG_URL;
 
 // type ResponseType<T> = AxiosResponse<T> & {
 //   data: T;
