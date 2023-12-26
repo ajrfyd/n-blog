@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPostsData, getTagsApi, getPostByIdApi } from "./api";
+import { getPostsData, getTagsApi, getPostByIdApi, reqPostData, reqPostById } from "./api";
 import { toBeSavedPostsType } from "../../stroe/posts";
-import { ServerTagType } from "../../ types/postTypes";
+import { ServerTagType, PostListType } from "../../ types/postTypes";
 import { TagType } from "../../ types/postTypes";
+// import { AxiosError, AxiosResponse } from "axios";
 
 // export const usePostQuery = (postId: string, isRender: boolean) => {
 
@@ -62,3 +63,25 @@ export const useAllTagsQuery = (isModify: boolean) => {
 
   return data;
 };
+
+export const useReqPostData = (isFetching: boolean, tag: TagType | null) => {
+  const { data, isLoading, error } = useQuery<PostListType>({
+    queryKey: ["reqPost"],
+    queryFn: () => reqPostData(tag ? tag.value : null),
+    // select: d => (console.log(d), d),
+    enabled: isFetching
+  });
+
+  return { data, isLoading, error };
+};
+
+export const useReqPostDataById = (id: string) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["post"],
+    queryFn: () => reqPostById(id),
+  });
+
+  return { data, isLoading };
+};
+
+// interface UseQueryOptionsType<T> extends UseQueryOptions<AxiosResponse<T>, AxiosError, T, QueryKey[]> {};
