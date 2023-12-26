@@ -16,3 +16,19 @@ export type PostType = {
   createdAt: Date;
 };
 
+export type PostDataType = {
+  status: number;
+  result: PostType[];
+  message: string;
+};
+
+type PostListResultType = {
+  posts: PostType[];
+  tags: ServerTagType[];
+}
+
+export type PostListType = {
+  status: string;
+  result: PostListResultType;
+  message: string;
+};

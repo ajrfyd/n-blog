@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { usePostQuery } from "../../lib/api/apiQueries";
+import { useReqPostDataById } from "../../lib/api/apiQueries";
 import Banner from "../banner/Banner";
 import MtContainer from "../common/MtContainer";
 import MainTitle from '../common/MainTitle';
@@ -10,7 +10,8 @@ import { Undo2Icon } from "lucide-react";
 
 const PostDetail = () => {
   const { id } = useParams();
-  const { data: post } = usePostQuery(id as string, true);
+  // const { data: post } = usePostQuery(id as string, true);
+  const { data: post } = useReqPostDataById(id as string);
   const navigate = useNavigate();
 
   return (
@@ -22,7 +23,7 @@ const PostDetail = () => {
         post && (
           <Container >
             <MDEditor.Markdown 
-            source={post.body} 
+            source={post.result.body} 
             style={{
               marginTop: "1rem",
               whiteSpace: 'pre-wrap', 
