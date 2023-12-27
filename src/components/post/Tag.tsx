@@ -11,7 +11,6 @@ type TagProps = {
 
 // const Tag = ({ title, onClick }: TagProps) => <TagContainer onClick={onClick}>{title}</TagContainer>;
 const Tag = ({ title, onClick, selected }: TagProps) => {
-  console.log(selected);
   return <TagContainer onClick={onClick} selected={selected}>{title}</TagContainer>;
 };
 

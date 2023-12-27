@@ -28,8 +28,6 @@ const PostListPage = () => {
     setTag(tag);
   };
 
-  console.log(`%c${isFetching}`, "color: red");
-
   return (
     <MtContainer>
       <Banner >
