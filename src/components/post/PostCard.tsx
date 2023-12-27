@@ -1,20 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { PostType } from '../../ types/postTypes';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import Slider from '../slider/Slider';
 
 type PostCardProps = {
   post: PostType;
 };
 
 const PostCard = ({ post }: PostCardProps) => {
+  const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
   const getCreatedAt = useCallback((date: string) => new Intl.DateTimeFormat("ko", { dateStyle: "medium" }).format(new Date(date)), []);
   // (date: string) => new Intl.DateTimeFormat("ko", { dateStyle: "medium" }).format(new Date(date))
 
   return (
-    <CardContainer onClick={() => navigate(`/post/${post.id}`)}>
+    <CardContainer 
+      onClick={() => navigate(`/post/${post.id}`)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {/* <Card.Header>Tags</Card.Header> */}
       <Card.Header>{getCreatedAt(post.createdAt.toString())}</Card.Header>
       <Card.Body>
@@ -23,6 +29,7 @@ const PostCard = ({ post }: PostCardProps) => {
           { post.body }
         </Card.Text>
       </Card.Body>
+      <Slider items={post.tags} $hovered={hovered}/>
     </CardContainer>
   )
 }
