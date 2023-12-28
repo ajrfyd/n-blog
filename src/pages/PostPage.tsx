@@ -61,11 +61,12 @@ const PostPage = () => {
       tags: localTags,
       createdAt: new Date(Date.now())
     };
-    
+    const { VITE_KLOG_URL } = import.meta.env;
+
     // setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
     //! post 작성 주소 수정 요망
-    const { data } = await axios("http://localhost:8080/posts/write", { data: post, method: "post" });
-    data.status === 200 ? navigate("/posts", { replace: true }) : dispatch(notify("오류 발생!"));
+    const { data } = await axios(`${VITE_KLOG_URL}/post/create`, { data: post, method: "post" });
+    data.status >= 400 ? navigate("/error", { state: { status: data.status, message: data.message } }) : navigate(`/post/${data.result}`);
   };
 
   useEffect(() => {
