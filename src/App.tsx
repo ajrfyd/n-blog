@@ -19,6 +19,7 @@ import CustomButton from './components/buttons/CustomButton';
 import NavBar from "./components/nav/Navbar";
 import PostListPage from "./pages/PostListPage";
 import PostDetail from "./components/post/PostDetail";
+import Error from "./components/page/Error";
 
 const App = () => {
   const [user, setUser] = useUserState();
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="/posts" element={<PostListPage />}/>
         <Route path="/post/:id" element={<PostDetail/>}/>
         <Route path="/write" element={<PostPage />}/>
+        <Route path="/error" element={<Error/>} />
         <Route path="*" element={< NotFound/>}/>
       </Routes>
       <Notification />
