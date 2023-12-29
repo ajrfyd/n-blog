@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import React from "react";
+import { ChildrenProp } from "../../types";
 
-type ArrowButtonProps = {
-  children: React.ReactNode;
+type ArrowButtonProps = ChildrenProp & {
   onClick?: () => void;
   style?: React.CSSProperties;
 };

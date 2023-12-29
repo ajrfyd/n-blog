@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { UserStateType } from "../../ types/userType";
+import { UserStateType } from "../../types/userType";
 
 const useUserState = () => {
   const [user, setUser] = useState<UserStateType | null>(() => {

@@ -4,7 +4,7 @@ import { StateType } from "../../stroe/posts";
 import { 
   PostType, PostListType, ServerDefaultResponseType, 
   NewPostType 
-} from "../../ types/postTypes";
+} from "../../types/postTypes";
 // const env = import.meta.env.VITE_ENV;
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, VITE_KLOG_URL } = import.meta.env;
 

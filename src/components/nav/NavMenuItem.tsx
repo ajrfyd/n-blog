@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { InitialType } from "../../ types/global";
+import { ChildrenProp } from "../../types";
 import { darken } from "polished";
 
-type NavMenuItemProps = InitialType & {
+type NavMenuItemProps = ChildrenProp & {
   to?: string;
   onClick?: () => void;
 };

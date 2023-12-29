@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useReqPostData } from "../lib/api/apiQueries";
-import { TagType } from "../ types/postTypes";
+import { TagType } from "../types";
 import { Container, Col } from "react-bootstrap";
 import Banner from "../components/banner/Banner";
 import Categories from "../components/post/Categories";

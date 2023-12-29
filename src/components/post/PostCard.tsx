@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import { PostType } from '../../ types/postTypes';
+import { PostType } from '../../types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Slider from '../slider/Slider';

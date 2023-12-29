@@ -9,7 +9,7 @@ import InputSelect from "../components/post/InputSelect";
 import CustomButton from "../components/buttons/CustomButton";
 import CreatableSelect from "react-select/creatable";
 import { Input } from "../components/input/SearchInput";
-import { ServerTagType } from "../ types/postTypes";
+import { ServerTagType } from "../types";
 import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -18,8 +18,6 @@ import { useReqAllTagsData } from "../lib/api/apiQueries";
 import useMutatePost from "../lib/hooks/useMutatePost";
 // import posts, { getPostsData } from "../stroe/posts";
 
-// Todo - CreatableSelect 상태값 따로 관리
-// Todo - post axios 주소 변경 및 instance 화
 type MdChangeType = (value?: string, e?: React.ChangeEvent<HTMLTextAreaElement>) => void;
 
 const PostPage = () => {

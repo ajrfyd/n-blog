@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import Badge from "react-bootstrap/Badge";
-import { ServerTagType } from "../../ types/postTypes";
+import { ServerTagType } from "../../types";
 import Marquee from "react-fast-marquee";
 
 type SliderProp = {
