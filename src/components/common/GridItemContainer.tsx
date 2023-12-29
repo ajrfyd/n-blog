@@ -1,5 +1,5 @@
 import { Row } from "react-bootstrap";
-import { ChildrenProp } from "../../ types/propsTypes";
+import { ChildrenProp } from "../../types";
 
 type GridItemContainerProps = ChildrenProp & {
 

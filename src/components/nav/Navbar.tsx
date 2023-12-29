@@ -1,6 +1,6 @@
 // import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { UserStateType } from '../../ types/userType';
+import { UserStateType } from '../../types';
 import { useDispatch } from 'react-redux';
 import { notify } from '../../stroe/notify';
 // import { oauthApi } from '../../lib/api/api';

@@ -1,4 +1,4 @@
-import { NewPostType } from "../../ types/postTypes";
+import { NewPostType } from "../../types/postTypes";
 import { useMutation } from "@tanstack/react-query";
 import { createPost } from "../api/api";
 import { AxiosError } from "axios";

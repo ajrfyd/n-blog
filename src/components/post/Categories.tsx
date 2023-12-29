@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { ServerTagType, TagType } from "../../ types/postTypes";
+import { ServerTagType, TagType } from "../../types";
 import styled from "styled-components";
 import ArrowButton from "../buttons/ArrowButton";
 import { ArrowBigLeftDashIcon, ArrowBigRightDashIcon } from "lucide-react";

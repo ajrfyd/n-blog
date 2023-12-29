@@ -4,7 +4,7 @@ import {
   reqPostById, reqTagsData 
 } from "./api";
 import { toBeSavedPostsType } from "../../stroe/posts";
-import { ServerTagType, PostListType, TagListResultType, TagType } from "../../ types/postTypes";
+import { ServerTagType, PostListType, TagListResultType, TagType } from "../../types/postTypes";
 // import { AxiosError, AxiosResponse } from "axios";
 
 // export const usePostQuery = (postId: string, isRender: boolean) => {
