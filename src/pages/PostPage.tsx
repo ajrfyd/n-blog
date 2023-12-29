@@ -3,7 +3,6 @@ import ContentContainer from "../components/post/ContentContainer";
 import MDEditor from "@uiw/react-md-editor";
 import styled from "styled-components";
 import { v4 as uuid } from "uuid";
-import axios from "axios";
 import usePathName from "../lib/hooks/usePathName";
 import BtnContainer from "../components/buttons/BtnContainer";
 import InputSelect from "../components/post/InputSelect";
@@ -15,19 +14,9 @@ import { notify } from "../stroe/notify";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useUserState from "../lib/hooks/useLogin";
-import { useAllTagsQuery } from "../lib/api/apiQueries";
+import { useReqAllTagsData } from "../lib/api/apiQueries";
+import useMutatePost from "../lib/hooks/useMutatePost";
 // import posts, { getPostsData } from "../stroe/posts";
-
-export type MdTagType = {
-  id: string;
-  label: string;
-};
-
-// type PostType = {
-//   title: string;
-//   body: string | undefined;
-//   tags: ServerTagType[];
-// };
 
 // Todo - CreatableSelect 상태값 따로 관리
 // Todo - post axios 주소 변경 및 instance 화
@@ -35,38 +24,31 @@ type MdChangeType = (value?: string, e?: React.ChangeEvent<HTMLTextAreaElement>)
 
 const PostPage = () => {
   const [path] = usePathName();
-  const serverTags = useAllTagsQuery(true);
+  const { tagList } = useReqAllTagsData();
   const [user] = useUserState();
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  // const [post, setPost] = useState<PostType>({ title: "", body: "", tags: [] });
-  // const localTags = usePostsData("tags") as ServerTagType[];
   const [localTags, setLocalTags] = useState<ServerTagType[]>([]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const posts = useSelector((state: RootReducerType) => state.posts);
+
+  const { mutate } = useMutatePost(
+    { title, body, tags: localTags },
+    (id) => navigate(`/post/${id}`), 
+    (error) => navigate("/error", { state: { status: error.response?.data.status, message: error.response?.data.message }})
+  );
 
   const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value), [title]);
+
   const onChangeBody = useCallback<MdChangeType>((value) => setBody(value as string), [body]);
-  
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(title === "" || body === "") return dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
-    // if(post.title === "" || post.body === "") dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
-    const post = {
-      title,
-      body,
-      id: uuid(),
-      tags: localTags,
-      createdAt: new Date(Date.now())
-    };
-    const { VITE_KLOG_URL } = import.meta.env;
-
-    // setPost(prev => ({ ...prev, createdAt: new Date(Date.now()) }));
-    //! post 작성 주소 수정 요망
-    const { data } = await axios(`${VITE_KLOG_URL}/post/create`, { data: post, method: "post" });
-    data.status >= 400 ? navigate("/error", { state: { status: data.status, message: data.message } }) : navigate(`/post/${data.result}`);
+    
+    mutate();
   };
 
   useEffect(() => {
@@ -77,7 +59,6 @@ const PostPage = () => {
   }, [user]);
 
   // if(!data) return null;
-
   return (
     <ContentContainer>
       <FormContainer data-color-mode="light" onSubmit={onSubmit}>
@@ -99,25 +80,42 @@ const PostPage = () => {
               isMulti
               onCreateOption={(label) => {
                 const newTag = { id: uuid(), label };
-                console.log(label, '< label');
                 setLocalTags(prev => [newTag,...prev]);
                 // setPost(prev => ({...prev, tags: [newTag, ...prev.tags] }))
               }}
-              options={serverTags? serverTags.map(tag => ({ label: tag.label, value: tag.id })) : [{ label: "Loading...", value: "loading..." }]}
+
+
+              options={
+                tagList ? 
+                  tagList.result.map(tag => ({ label: tag.label, value: tag.id })) :
+                  [{ label: "Loading...", value: "loading..." }]
+              }
+              
               // value={post.tags.map(tag => ({ label: tag.label, value: tag.id }))}
               // onChange={(tag) => {
               //   setPost(post.map(p => ))
               // }}
-              value={localTags.map(tag => ({ label: tag.label, value: tag.id }))}
+              value={
+                localTags.map(tag => ({ label: tag.label, value: tag.id }))
+              }
               onChange={(tags, action) => {
+                //* tags: 선택한 모든 값이 배열로 들어옴
+                //* action: select시 action.action === 'select-option'
+                //* delete시 action.action === 'remove-value'
+                //* clear시 action.action === 'clear'
                 //* onChang로 들어오는 값은 단일 값이 아닌 MultiValue이다
                 //* 반복문이 필요하다
-                if(!action.option) return;
-                // dispatch(notify("이 태그는 선택할 수 없습니다."));
-                console.log(action.option, "actiodnd");
-                if(action.option.label === "All") return dispatch(notify("이 태그는 선택할 수 없습니다."));
-                const serverTags = tags.map(tag => ({ id: tag.value, label: tag.label }));
-                setLocalTags(serverTags);
+                if(!action) return;
+                const { action: choice } = action;
+                
+                if(choice === "clear") return setLocalTags([]);
+                if(choice === "remove-value") return setLocalTags(prev => prev.filter(tag => action.removedValue.value !== tag.id));
+                if(choice === "select-option") {
+                  const { option } = action;
+                  if(!option) return;
+                  option.label && option.label === "All" ? dispatch(notify("이 태그는 선택할 수 없습니다.")) : setLocalTags(prev => [...prev, { id: option.value, label: option.label }]);
+                };
+
               }}
               // onChange={tag => setLocalTags(prev => [{ id: tag.value, label: tag.label },...prev])}
             />

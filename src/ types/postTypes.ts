@@ -32,3 +32,21 @@ export type PostListType = {
   result: PostListResultType;
   message: string;
 };
+
+export type TagListResultType = {
+  status: string;
+  result: ServerTagType[];
+  message: string;
+};
+
+export type ServerDefaultResponseType<T> = {
+  status: number;
+  message: string;
+  result: T;
+};
+
+export type NewPostType = {
+  title: string;
+  body: string;
+  tags: ServerTagType[];
+};

@@ -81,7 +81,14 @@ const App = () => {
       <Notification />
       {
         (user && (user.name === "ajrfyd" && user.role === 'admin')) && (
-          <div style={{ position: "fixed", right: "2rem", bottom: "2rem" }}>
+          <div 
+            style={{ 
+              position: "fixed", 
+              right: "2rem", 
+              bottom: "2rem",
+              zIndex: 10
+            }}
+          >
             <CustomButton 
               $isIcon
               onClick={() => navigate("/write")}
