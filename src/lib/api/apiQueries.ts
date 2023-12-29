@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPostsData, getTagsApi, getPostByIdApi, reqPostData, reqPostById } from "./api";
+import { 
+  getPostsData, getTagsApi, getPostByIdApi, reqPostData, 
+  reqPostById, reqTagsData 
+} from "./api";
 import { toBeSavedPostsType } from "../../stroe/posts";
-import { ServerTagType, PostListType } from "../../ types/postTypes";
-import { TagType } from "../../ types/postTypes";
+import { ServerTagType, PostListType, TagListResultType, TagType } from "../../ types/postTypes";
 // import { AxiosError, AxiosResponse } from "axios";
 
 // export const usePostQuery = (postId: string, isRender: boolean) => {
@@ -82,6 +84,14 @@ export const useReqPostDataById = (id: string) => {
   });
 
   return { data, isLoading };
+};
+
+export const useReqAllTagsData = () => {
+  const { data: tagList, isLoading } = useQuery<TagListResultType>({
+    queryKey: ["tags"],
+    queryFn: reqTagsData
+  });
+  return { tagList, isLoading };
 };
 
 // interface UseQueryOptionsType<T> extends UseQueryOptions<AxiosResponse<T>, AxiosError, T, QueryKey[]> {};

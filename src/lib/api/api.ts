@@ -1,7 +1,10 @@
 import axios from "axios";
 // InternalAxiosRequestConfig
 import { StateType } from "../../stroe/posts";
-import { PostType, PostListType } from "../../ types/postTypes";
+import { 
+  PostType, PostListType, ServerDefaultResponseType, 
+  NewPostType 
+} from "../../ types/postTypes";
 // const env = import.meta.env.VITE_ENV;
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, VITE_KLOG_URL } = import.meta.env;
 
@@ -9,6 +12,7 @@ const getPostsUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const getTagsUrl = VITE_ENV === "development" ? VITE_DEV_URL + "tags" : VITE_PROD_URL + "tags";
 const oauthLoginUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const baseUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
+
 const newAPIurl = VITE_KLOG_URL;
 
 // type ResponseType<T> = AxiosResponse<T> & {
@@ -81,23 +85,35 @@ export const updatePost = axios.create({
   baseURL: baseUrl + "posts"
 });
 
-const reqPostDataConf = axios.create({
-  baseURL: newAPIurl
-});
 
+const reqKlogApi = axios.create({
+  baseURL: VITE_KLOG_URL,
+  headers: {
+    'Content-Type': "application/json"
+  }
+});
+  
 export const reqPostData = async<T = PostListType>(id: string | null): Promise<T> => {
-  const { data } = await reqPostDataConf.get<T>(`/post${id ? `/tag/${id}` : ""}`);
+  const { data } = await reqKlogApi.get<T>(`/post${id ? `/tag/${id}` : ""}`);
   return data;
 };
 
 export const reqPostById = async (id: string) => {
-  const { data } = await reqPostDataConf.get(`/post/${id}`);
+  const { data } = await reqKlogApi.get(`/post/${id}`);
+  
+  return data;
+};
+
+export const reqTagsData = async <T>(): Promise<T> => {
+  const { data } = await reqKlogApi.get("/tags");
 
   return data;
 };
 
-
-
+export const createPost = async <T>(post: NewPostType) => {
+  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/create", { data: post });
+  return data;
+};
 
 // const getOauthAxios = (token: string) => {
 //   const oautAxios = axios.create({
