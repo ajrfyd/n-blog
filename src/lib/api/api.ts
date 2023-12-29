@@ -13,8 +13,6 @@ const getTagsUrl = VITE_ENV === "development" ? VITE_DEV_URL + "tags" : VITE_PRO
 const oauthLoginUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const baseUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 
-const newAPIurl = VITE_KLOG_URL;
-
 // type ResponseType<T> = AxiosResponse<T> & {
 //   data: T;
 // };

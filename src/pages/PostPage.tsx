@@ -47,7 +47,7 @@ const PostPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(title === "" || body === "") return dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
-    
+
     mutate();
   };
 
@@ -98,7 +98,7 @@ const PostPage = () => {
               value={
                 localTags.map(tag => ({ label: tag.label, value: tag.id }))
               }
-              onChange={(tags, action) => {
+              onChange={(_, action) => {
                 //* tags: 선택한 모든 값이 배열로 들어옴
                 //* action: select시 action.action === 'select-option'
                 //* delete시 action.action === 'remove-value'
