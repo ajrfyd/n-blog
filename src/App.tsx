@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { oauthApi } from "./lib/api/api";
+import { reqOauth } from "./lib/api/api";
 import { useDispatch } from "react-redux";
 import { notify } from "./stroe/notify";
 // import Header from "./layouts/Header";
@@ -20,6 +20,7 @@ import NavBar from "./components/nav/Navbar";
 import PostListPage from "./pages/PostListPage";
 import PostDetail from "./components/post/PostDetail";
 import Error from "./components/page/Error";
+import { ResponseUserType } from "./types";
 
 const App = () => {
   const [user, setUser] = useUserState();
@@ -36,21 +37,10 @@ const App = () => {
   };
 
   const reqLogin = async (code: string) => {
-    const { data } = await oauthApi({
-      method: 'post',
-      url: `auth`,
-      headers: {
-        accept: 'application/json',
-      },
-      data: {
-        clientId: import.meta.env.VITE_GH_ID,
-        // client_secret: import.meta.env.VITE_GH_SECRET,
-        code
-      }
-    });
+    const { result } = await reqOauth<ResponseUserType>(code);
 
-    setUser({ name: data.userId, role: data.userId === "ajrfyd" ? "admin" : "user" });
-    dispatch(notify(`${data.userId}님 환영합니다. (role: ${data.userId === "ajrfyd" ? "admin" : "user"})`));
+    setUser({ name: result.name.length >= 1 ? result.name : result.id, role: result.id === "ajrfyd" ? "admin" : "user", id: result.id });
+    dispatch(notify(`${result.name.length >= 1 ? result.name : result.id}님 환영합니다. (role: ${result.id === "ajrfyd" ? "admin" : "user"})`));
   };
 
   useEffect(() => {
@@ -80,7 +70,7 @@ const App = () => {
       </Routes>
       <Notification />
       {
-        (user && (user.name === "ajrfyd" && user.role === 'admin')) && (
+        (user && (user.id === "ajrfyd" && user.role === 'admin')) && (
           <div 
             style={{ 
               position: "fixed", 
