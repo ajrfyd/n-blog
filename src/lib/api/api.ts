@@ -5,8 +5,9 @@ import {
   PostType, PostListType, ServerDefaultResponseType, 
   NewPostType 
 } from "../../types/postTypes";
-// const env = import.meta.env.VITE_ENV;
-const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, VITE_KLOG_URL } = import.meta.env;
+const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, 
+  VITE_KLOG_URL, VITE_GH_ID 
+} = import.meta.env;
 
 const getPostsUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const getTagsUrl = VITE_ENV === "development" ? VITE_DEV_URL + "tags" : VITE_PROD_URL + "tags";
@@ -90,6 +91,10 @@ const reqKlogApi = axios.create({
     'Content-Type': "application/json"
   }
 });
+
+const reqGithubOauthApi = axios.create({
+  baseURL: `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`
+});
   
 export const reqPostData = async<T = PostListType>(id: string | null): Promise<T> => {
   const { data } = await reqKlogApi.get<T>(`/post${id ? `/tag/${id}` : ""}`);
@@ -110,6 +115,15 @@ export const reqTagsData = async <T>(): Promise<T> => {
 
 export const createPost = async <T>(post: NewPostType) => {
   const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/create", { data: post });
+  return data;
+};
+
+export const reqOauth = async <T>(code: string) => {
+  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/oauth", { code }, {
+    headers: {
+      Accept: "application/json"
+    }
+  });
   return data;
 };
 

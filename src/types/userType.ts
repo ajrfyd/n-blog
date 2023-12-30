@@ -5,3 +5,10 @@ export type UserStateType = {
   role: UserRole;
   isLogin?: boolean;
 };
+
+export type ResponseUserType = {
+  name: string;
+  role: UserRole;
+  access_token: string;
+  id: string;
+};
