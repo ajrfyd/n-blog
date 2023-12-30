@@ -6,7 +6,7 @@ import {
   NewPostType 
 } from "../../types/postTypes";
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, 
-  VITE_KLOG_URL, VITE_GH_ID 
+  VITE_KLOG_URL 
 } = import.meta.env;
 
 const getPostsUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
@@ -92,9 +92,9 @@ const reqKlogApi = axios.create({
   }
 });
 
-const reqGithubOauthApi = axios.create({
-  baseURL: `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`
-});
+// const reqGithubOauthApi = axios.create({
+//   baseURL: `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`
+// });
   
 export const reqPostData = async<T = PostListType>(id: string | null): Promise<T> => {
   const { data } = await reqKlogApi.get<T>(`/post${id ? `/tag/${id}` : ""}`);
