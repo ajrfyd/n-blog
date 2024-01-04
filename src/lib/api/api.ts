@@ -4,7 +4,7 @@ import { StateType } from "../../stroe/posts";
 import { 
   PostType, PostListType, ServerDefaultResponseType, 
   NewPostType 
-} from "../../types/postTypes";
+} from "../../types";
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, 
   VITE_KLOG_URL 
 } = import.meta.env;
@@ -115,6 +115,12 @@ export const reqTagsData = async <T>(): Promise<T> => {
 
 export const createPost = async <T>(post: NewPostType) => {
   const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/create", { data: post });
+  return data;
+};
+
+export const editPost = async <T>(post: NewPostType) => {
+  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/edit", { data: post });
+
   return data;
 };
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ResponseUserType } from "../../types";
 
 const useUserState = () => {
-  const [user, setUser] = useState<Omit<ResponseUserType, "access_token"> | null>(() => {
+  const [user, setUser] = useState<ResponseUserType | null>(() => {
     const storage = localStorage.getItem("userState");
     return !storage ? null : JSON.parse(storage);
   }); 
@@ -13,7 +13,7 @@ const useUserState = () => {
     localStorage.setItem("userState", JSON.stringify(user));
   }, [user]);
 
-  return [user, setUser] as [Omit<ResponseUserType, "access_token">, typeof setUser];
+  return [user, setUser] as [ResponseUserType, typeof setUser];
 };
 
 export default useUserState;

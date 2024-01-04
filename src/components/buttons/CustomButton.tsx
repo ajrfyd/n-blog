@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { darken, lighten } from "polished";
+import { useParams } from "react-router-dom";
 
 type CustomButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   // children: React.ReactNode;
@@ -12,6 +13,7 @@ type CustomButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const CustomButton: React.FC<CustomButtonProps> = ({ children, color, size = "md", onClick, $isIcon, $bgColor, ...rest }: CustomButtonProps) => {
+  const params = useParams();
 
   return (
     <Button color={color} size={size} onClick={onClick} $isIcon={$isIcon} $bgColor={$bgColor} {...rest}>

@@ -4,12 +4,12 @@ import { getPathName } from "../utils";
 
 const usePathName = () => {
   const [path, setPath] = useState<string>("");
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
   useEffect(() => {
     setPath(getPathName(pathname));
   }, [pathname]);
 
-  return [path];
+  return [path, state];
 };
 
 export default usePathName;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useReqPostData } from "../lib/api/apiQueries";
-import { TagType } from "../types";
+import { useNavigate } from "react-router-dom";
+import { ResponseUserType, TagType } from "../types";
 import { Container, Col } from "react-bootstrap";
 import Banner from "../components/banner/Banner";
 import Categories from "../components/post/Categories";
@@ -11,12 +12,20 @@ import MainTitle from '../components/common/MainTitle';
 import SubP from '../components/common/SubP';
 import Loading from "../components/page/Loading";
 import NoResults from "../components/page/NoResults";
+import CustomButton from '../components/buttons/CustomButton';
+import { PenToolIcon } from "lucide-react";
 
-const PostListPage = () => {
+type PostListProps = {
+  user: ResponseUserType;
+};
+
+const PostListPage = ({ user }: PostListProps) => {
   const [tag, setTag] = useState<TagType | null>(null);
   const [isFetching, setIsFetching] = useState(true);
   const { data, isLoading  } = useReqPostData(isFetching, tag);
-  
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     setIsFetching(false);
   }, [tag]);
@@ -27,7 +36,7 @@ const PostListPage = () => {
     setIsFetching(true);
     setTag(tag);
   };
-
+  
   return (
     <MtContainer>
       <Banner >
@@ -56,6 +65,23 @@ const PostListPage = () => {
       }
       {
         isLoading && <Loading />
+      }
+      {
+        (user && user.role === "admin") && (
+          <div style={{
+            position: "fixed",
+            right: "2rem", 
+            bottom: "2rem",
+            zIndex: 10
+          }}>
+            <CustomButton
+              $isIcon
+              onClick={() => navigate("/write", { state: user.access_token })}
+            >
+              <PenToolIcon />
+            </CustomButton>
+          </div>
+        ) 
       }
     </MtContainer>
   )

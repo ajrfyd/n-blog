@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import GlobalStyles from './lib/styles/GlobalStyles.ts';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from 'styled-components';
 import { themes } from './lib/styles/themes.ts';
 import rootReducer from './stroe/index.ts';
@@ -27,16 +28,18 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={client}>
-    <ReactQueryDevtools/>
-    <Provider store={store}>
-      <BrowserRouter>
-        <GlobalStyles />
-        <ThemeProvider theme={{ themes }}>
-          <App /> 
-        </ThemeProvider>
-      </BrowserRouter>
-    </Provider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={client}>
+      <ReactQueryDevtools/>
+      <Provider store={store}>
+        <BrowserRouter>
+          <GlobalStyles />
+          <ThemeProvider theme={{ themes }}>
+            <App /> 
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
+  </HelmetProvider>
 )
 
