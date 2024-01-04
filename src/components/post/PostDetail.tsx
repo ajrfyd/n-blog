@@ -6,23 +6,28 @@ import MainTitle from '../common/MainTitle';
 import MDEditor from "@uiw/react-md-editor";
 import { Container } from "react-bootstrap";
 import Iconbutton from '../buttons/IconButton';
-import { Undo2Icon } from "lucide-react";
+import { Undo2Icon, FileEditIcon } from "lucide-react";
+import { ResponseUserType } from "../../types";
 
-const PostDetail = () => {
+type PostDetailProps = {
+  user: ResponseUserType;
+};
+
+const PostDetail = ({ user }: PostDetailProps) => {
   const { id } = useParams();
   // const { data: post } = usePostQuery(id as string, true);
-  const { data: post } = useReqPostDataById(id as string);
+  const { data: post, isLoading } = useReqPostDataById(id as string);
   const navigate = useNavigate();
-
+  
   return (
     <MtContainer >
       <Banner>
-        <MainTitle>Welcome!</MainTitle>
+        <MainTitle>{ !isLoading ? post.result.title : "Loading..." }</MainTitle>
       </Banner>
       {
         post && (
-          <Container >
-            <MDEditor.Markdown 
+          <Container className="position-relative">
+            <MDEditor.Markdown
             source={post.result.body} 
             style={{
               marginTop: "1rem",
@@ -34,6 +39,16 @@ const PostDetail = () => {
               color: "var(--purple)"
             }}
           />
+          {
+            (user && user.role === "admin") && (
+              <Iconbutton
+                style={{ position: "absolute", top: "1rem", right: "1.5rem" }}
+                onClick={() => navigate(`/write/${post.result.id}`, { state: post.result })}
+              >
+                <FileEditIcon />
+              </Iconbutton>
+            )
+          }
           </Container>
         )
       }
@@ -45,6 +60,6 @@ const PostDetail = () => {
       </Iconbutton>
     </MtContainer>
   )
-}
+};
 
 export default PostDetail;
