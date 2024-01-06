@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChevronsDownIcon } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const Main = () => {
@@ -35,6 +36,10 @@ const Main = () => {
 
   return (
     <Container>
+      <ScrollDownContainer>
+        <p>Scroll Down</p>
+        <ChevronsDownIcon />
+      </ScrollDownContainer>
       {
         introArr.map((text, idx, arr) => 
           (
@@ -59,6 +64,31 @@ const Container = styled.main`
   height: 200%;
   /* border: 5px solid red; */
   padding-bottom: 1rem;
+  position: relative;
+`;
+
+const UpNDown = keyframes`
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+`
+
+const ScrollDownContainer = styled.div`
+  position: absolute;
+  display: none;
+  
+  @media (min-width: 576px) {
+    display: block;
+    right: 2rem;
+  
+    svg {
+      transition: 1s;
+      animation: ${UpNDown} .8s ease-out infinite;
+    }
+  }
 `;
 
 const ParalSection = styled.section`
@@ -70,7 +100,6 @@ const ParalSection = styled.section`
   margin-right: 0;
   position: relative;
   padding-top: 15vw;
-
 
   &:nth-child(even) {
     /* margin-right: auto; */

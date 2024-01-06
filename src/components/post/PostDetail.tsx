@@ -5,7 +5,9 @@ import MtContainer from "../common/MtContainer";
 import MainTitle from '../common/MainTitle';
 import MDEditor from "@uiw/react-md-editor";
 import { Container } from "react-bootstrap";
+import Loading from "../page/Loading";
 import Iconbutton from '../buttons/IconButton';
+import Seo from "../helmet/Seo";
 import { Undo2Icon, FileEditIcon } from "lucide-react";
 import { ResponseUserType } from "../../types";
 
@@ -15,20 +17,29 @@ type PostDetailProps = {
 
 const PostDetail = ({ user }: PostDetailProps) => {
   const { id } = useParams();
-  // const { data: post } = usePostQuery(id as string, true);
   const { data: post, isLoading } = useReqPostDataById(id as string);
   const navigate = useNavigate();
   
+  if(isLoading) return <Loading />
   return (
     <MtContainer >
+      {
+        post && (
+          <Seo 
+            title={post.title}
+            desc={`${post.title} - ${post.tags.map((tag: { id: string, label: string }) => tag.label)}`}
+            url={`https://k-log3943.netlify.app/post/${post.id}`}
+          />
+        )
+      }
       <Banner>
-        <MainTitle>{ !isLoading ? post.result.title : "Loading..." }</MainTitle>
+        <MainTitle>{ post?.title }</MainTitle>
       </Banner>
       {
         post && (
           <Container className="position-relative">
             <MDEditor.Markdown
-            source={post.result.body} 
+            source={post.body} 
             style={{
               marginTop: "1rem",
               whiteSpace: 'pre-wrap', 
@@ -43,7 +54,7 @@ const PostDetail = ({ user }: PostDetailProps) => {
             (user && user.role === "admin") && (
               <Iconbutton
                 style={{ position: "absolute", top: "1rem", right: "1.5rem" }}
-                onClick={() => navigate(`/write/${post.result.id}`, { state: post.result })}
+                onClick={() => navigate(`/write/${post.id}`, { state: post })}
               >
                 <FileEditIcon />
               </Iconbutton>

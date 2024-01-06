@@ -37,8 +37,10 @@ const PostPage = () => {
   const { mutate } = useMutatePost(
     { title, body, tags: localTags },
     (id) => navigate(`/post/${id}`), 
-    (error) => navigate("/error", { state: { status: error.response?.data.status, message: error.response?.data.message }}),
-    isEdit
+    (error) => navigate("/error", { state: { status: error.response?.data.status, message: error.response?.data.message }, replace: true }),
+    isEdit,
+    user.access_token || "",
+    id || ""
   );
 
   const onChangeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value), [title]);
