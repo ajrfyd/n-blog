@@ -3,9 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import { createPost, editPost } from "../api/api";
 import { AxiosError } from "axios";
 
-const useMutatePost = (post: NewPostType, successFn: (data: string) => void, errorFn: (error: AxiosError<{ status: number, message: string; result: null; }>) => void, isEdit: boolean) => {
+const useMutatePost = (post: NewPostType, successFn: (data: string) => void, errorFn: (error: AxiosError<{ status: number, message: string; result: null; }>) => void, isEdit: boolean, token: string, id: string) => {
   return useMutation({
-    mutationFn: () => isEdit ? editPost<string>(post) : createPost<string>(post),
+    mutationFn: () => isEdit ? editPost<string>({ ...post, id }, token) : createPost<string>(post),
     onSuccess: (data) => successFn(data.result),
     onError: (error: AxiosError<{ status: number, message: string; result: null; }>) => errorFn(error)
   });

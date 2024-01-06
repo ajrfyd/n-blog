@@ -3,7 +3,7 @@ import axios from "axios";
 import { StateType } from "../../stroe/posts";
 import { 
   PostType, PostListType, ServerDefaultResponseType, 
-  NewPostType 
+  NewPostType
 } from "../../types";
 const { VITE_ENV, VITE_DEV_URL, VITE_PROD_URL, 
   VITE_KLOG_URL 
@@ -101,8 +101,8 @@ export const reqPostData = async<T = PostListType>(id: string | null): Promise<T
   return data;
 };
 
-export const reqPostById = async (id: string) => {
-  const { data } = await reqKlogApi.get(`/post/${id}`);
+export const reqPostById = async <T>(id: string) => {
+  const { data } = await reqKlogApi.get<ServerDefaultResponseType<T>>(`/post/${id}`);
   
   return data;
 };
@@ -118,8 +118,12 @@ export const createPost = async <T>(post: NewPostType) => {
   return data;
 };
 
-export const editPost = async <T>(post: NewPostType) => {
-  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/edit", { data: post });
+export const editPost = async <T>(post: Omit<PostType, "createdAt">, token: string) => {
+  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/edit", post, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
 
   return data;
 };

@@ -1,10 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { 
-  getPostsData, getTagsApi, getPostByIdApi, reqPostData, 
-  reqPostById, reqTagsData 
+  getPostsData, getTagsApi, getPostByIdApi, 
+  reqPostData, reqPostById, reqTagsData
 } from "./api";
 import { toBeSavedPostsType } from "../../stroe/posts";
-import { ServerTagType, PostListType, TagListResultType, TagType } from "../../types/postTypes";
+import { 
+  ServerTagType, PostListType, 
+  TagListResultType, TagType, 
+  PostType 
+} from '../../types';
 // import { AxiosError, AxiosResponse } from "axios";
 
 // export const usePostQuery = (postId: string, isRender: boolean) => {
@@ -80,7 +84,8 @@ export const useReqPostData = (isFetching: boolean, tag: TagType | null) => {
 export const useReqPostDataById = (id: string) => {
   const { data, isLoading } = useQuery({
     queryKey: ["post"],
-    queryFn: () => reqPostById(id),
+    queryFn: () => reqPostById<PostType>(id),
+    select: response => response.result
   });
 
   return { data, isLoading };

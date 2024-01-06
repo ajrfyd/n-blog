@@ -13,6 +13,7 @@ import SubP from '../components/common/SubP';
 import Loading from "../components/page/Loading";
 import NoResults from "../components/page/NoResults";
 import CustomButton from '../components/buttons/CustomButton';
+import Seo from "../components/helmet/Seo";
 import { PenToolIcon } from "lucide-react";
 
 type PostListProps = {
@@ -36,9 +37,14 @@ const PostListPage = ({ user }: PostListProps) => {
     setIsFetching(true);
     setTag(tag);
   };
-  
+
   return (
     <MtContainer>
+      <Seo 
+        title="블로그 페이지 입니다." 
+        desc="기술 블로그 리스트 입니다." 
+        url="https://k-log3943.netlify.app/posts"
+      />
       <Banner >
         <MainTitle
           $isShadow
