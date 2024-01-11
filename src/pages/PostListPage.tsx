@@ -23,7 +23,7 @@ type PostListProps = {
 const PostListPage = ({ user }: PostListProps) => {
   const [tag, setTag] = useState<TagType | null>(null);
   const [isFetching, setIsFetching] = useState(true);
-  const { data, isLoading  } = useReqPostData(isFetching, tag);
+  const { data, isLoading, isError } = useReqPostData(isFetching, tag);
 
   const navigate = useNavigate();
 
@@ -49,10 +49,10 @@ const PostListPage = ({ user }: PostListProps) => {
         <MainTitle
           $isShadow
         >hk's Blog</MainTitle>
-        <SubP style={{ marginTop: "2rem" }}>Welcom my page!</SubP>
+        <SubP style={{ marginTop: "2rem" }}>Welcome my page!</SubP>
       </Banner>
       {
-        data && (
+        data && !isError && (
           <>
             <Categories tags={data.result.tags} tagSearchHandler={tagSearchHandler}/>  
             <Container style={{ height: "100vh" }}>
@@ -71,6 +71,9 @@ const PostListPage = ({ user }: PostListProps) => {
       }
       {
         isLoading && <Loading />
+      }
+      {
+        isError && <NoResults isError={isError}/>
       }
       {
         (user && user.role === "admin") && (

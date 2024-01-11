@@ -71,14 +71,14 @@ export const useAllTagsQuery = (isModify: boolean) => {
 };
 
 export const useReqPostData = (isFetching: boolean, tag: TagType | null) => {
-  const { data, isLoading, error } = useQuery<PostListType>({
+  const { data, isLoading, failureReason, isError } = useQuery<PostListType>({
     queryKey: ["reqPost"],
     queryFn: () => reqPostData(tag ? tag.value : null),
     // select: d => (console.log(d), d),
-    enabled: isFetching
+    enabled: isFetching,
   });
 
-  return { data, isLoading, error };
+  return { data, isLoading, failureReason, isError };
 };
 
 export const useReqPostDataById = (id: string) => {
