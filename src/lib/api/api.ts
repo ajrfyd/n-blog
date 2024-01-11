@@ -84,7 +84,6 @@ export const updatePost = axios.create({
   baseURL: baseUrl + "posts"
 });
 
-
 const reqKlogApi = axios.create({
   baseURL: VITE_KLOG_URL,
   headers: {
@@ -97,12 +96,14 @@ const reqKlogApi = axios.create({
 // });
   
 export const reqPostData = async<T = PostListType>(id: string | null): Promise<T> => {
-  const { data } = await reqKlogApi.get<T>(`/post${id ? `/tag/${id}` : ""}`);
+  // const { data } = await reqKlogApi.get<T>(`/post${id ? `/tag/${id}` : ""}`);
+  const { data } = await testApi.get<T>(`/klog/post${id ? `/tag/${id}` : ""}`);
   return data;
 };
 
 export const reqPostById = async <T>(id: string) => {
-  const { data } = await reqKlogApi.get<ServerDefaultResponseType<T>>(`/post/${id}`);
+  // const { data } = await reqKlogApi.get<ServerDefaultResponseType<T>>(`/post/${id}`);
+  const { data } = await testApi.get<ServerDefaultResponseType<T>>(`/klog/post/${id}`);
   
   return data;
 };
@@ -113,13 +114,29 @@ export const reqTagsData = async <T>(): Promise<T> => {
   return data;
 };
 
+const testApi = axios.create({
+  // baseURL: 'https://api.hkound.pe.kr',
+  baseURL: 'http://localhost:8800',
+  headers: {
+    'Content-Type': "application/json"
+  }
+});
+
 export const createPost = async <T>(post: NewPostType) => {
-  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/create", { data: post });
+  // const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/create", { data: post });
+  const { data } = await testApi.post<ServerDefaultResponseType<T>>("/klog/post/create", { data: post });
+  
   return data;
 };
 
 export const editPost = async <T>(post: Omit<PostType, "createdAt">, token: string) => {
-  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/edit", post, {
+  // const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/post/edit", post, {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`
+  //   }
+  // });
+
+  const { data } = await testApi.post<ServerDefaultResponseType<T>>("/klog/post/edit", post, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -129,7 +146,12 @@ export const editPost = async <T>(post: Omit<PostType, "createdAt">, token: stri
 };
 
 export const reqOauth = async <T>(code: string) => {
-  const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/oauth", { code }, {
+  // const { data } = await reqKlogApi.post<ServerDefaultResponseType<T>>("/oauth", { code }, {
+  //   headers: {
+  //     Accept: "application/json"
+  //   }
+  // });
+  const { data } = await testApi.post<ServerDefaultResponseType<T>>("/klog/oauth", { code }, {
     headers: {
       Accept: "application/json"
     }

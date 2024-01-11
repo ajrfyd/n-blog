@@ -21,10 +21,11 @@ export default NavMenuItem;
 
 const Item = styled(Link)`
   /* color: #f3f3f3; */
-  color: ${({ theme }) => theme.themes.color.white};
+  color: ${({ theme }) => theme.themes.color.purple};
   display: flex;
   align-items: center;
   font-size: 1.1rem;
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, .87);
 
   & + & {
     margin-left: 1rem;

@@ -44,7 +44,7 @@
 >
 > ~~server - Cloudtype~~
 > server - Ubuntu server
->
+> [레포](https://github.com/ajrfyd/ubuntu-api-server);
 > client > nginx > api Server
 
 [Link](https://k-log3943.netlify.app/)

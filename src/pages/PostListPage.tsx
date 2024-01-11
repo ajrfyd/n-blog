@@ -37,7 +37,7 @@ const PostListPage = ({ user }: PostListProps) => {
     setIsFetching(true);
     setTag(tag);
   };
-
+  
   return (
     <MtContainer>
       <Seo 
