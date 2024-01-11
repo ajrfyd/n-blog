@@ -25,13 +25,7 @@ const l: Middleware = (store) => (next) => (action) => {
 }
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, l)));
-const client = new QueryClient({
-  // defaultOptions: {
-  //   queries: {
-  //     staleTime: 1000 * 60
-  //   }
-  // }
-});
+const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <HelmetProvider>

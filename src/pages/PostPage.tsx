@@ -52,7 +52,7 @@ const PostPage = () => {
     if(title === "" || body === "") return dispatch(notify("타이틀이랑 본문은 입력해야해요!"));
     
     mutate();
-    console.log(title, body, localTags);
+    // console.log(title, body, localTags);
   };
 
   useEffect(() => {

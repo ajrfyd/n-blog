@@ -73,8 +73,11 @@ const NavBar = ({ logInHandler, logOutHandler, user }: NavBarProps) => {
             <Nav className="justify-content-end flex-grow-1 pe-3">
               {/* <Nav.Link href="#action1">Posts</Nav.Link> */}
               <NavMenuItem to="/posts" onClick={() => dispatch(notify("블로그 페이지 입니다."))}>Posts</NavMenuItem>
-              <NavMenuItem onClick={() => dispatch(notify("준비중 입니다."))}>Photos</NavMenuItem>
-              <NavMenuItem onClick={() => dispatch(notify("준비중 입니다."))}>Sample</NavMenuItem>
+              {/* <NavMenuItem onClick={() => dispatch(notify("준비중 입니다."))}>Photos</NavMenuItem>
+              <NavMenuItem onClick={() => dispatch(notify("준비중 입니다."))}>Sample</NavMenuItem> */}
+              
+              
+              
               {/* <NavDropdown
                 title="Dropdown"
                 id={'offcanvasNavbarDropdown-expand}'}

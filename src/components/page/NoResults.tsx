@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
-const NoResults = () => {
+type NoResultProps = {
+  isError?: boolean;
+};
+
+const NoResults = ({ isError }: NoResultProps) => {
 
   return (
     <Container>
       <p>
-        No Results!
+        {
+          !isError ? "No Results" : "Server Closed"
+        }
       </p>
     </Container>
   )
