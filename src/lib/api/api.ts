@@ -46,8 +46,8 @@ const getPostByTagApi = async(id: string) => {
   const postByTag = await axios.create({
     baseURL: getPostsUrl + `posts/tag/${id}`
   });
-  postByTag.interceptors.response.use(
-  );
+  // postByTag.interceptors.response.use(
+  // );
 
   return postByTag.get("/");
 };
