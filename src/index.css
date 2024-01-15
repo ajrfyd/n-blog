@@ -1,10 +1,18 @@
 :root {
   --white: #fff;
   --black: #000;
+  --brown: #DFBB9D;
+  --beige: #F7E2D6;
+  --teal: #9DD6DF;
+  --purple: #A084CF;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
 }
