@@ -26,20 +26,55 @@ const l: Middleware = (store) => (next) => (action) => {
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, l)));
 const client = new QueryClient();
+const root = document.getElementById('root') as HTMLElement;
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <HelmetProvider>
-    <QueryClientProvider client={client}>
-      <ReactQueryDevtools/>
-      <Provider store={store}>
-        <BrowserRouter>
-          <GlobalStyles />
-          <ThemeProvider theme={{ themes }}>
-            <App /> 
-          </ThemeProvider>
-        </BrowserRouter>
-      </Provider>
-    </QueryClientProvider>
-  </HelmetProvider>
+root.hasChildNodes() ? (
+  ReactDOM.hydrateRoot(root, 
+    <HelmetProvider>
+      <QueryClientProvider client={client}>
+        <ReactQueryDevtools/>
+        <Provider store={store}>
+          <BrowserRouter>
+            <GlobalStyles />
+            <ThemeProvider theme={{ themes }}>
+              <App /> 
+            </ThemeProvider>
+          </BrowserRouter>
+        </Provider>
+      </QueryClientProvider>
+    </HelmetProvider>
+    )
+  )
+    : (
+    ReactDOM.createRoot(root).render(
+      <HelmetProvider>
+      <QueryClientProvider client={client}>
+        <ReactQueryDevtools/>
+        <Provider store={store}>
+          <BrowserRouter>
+            <GlobalStyles />
+            <ThemeProvider theme={{ themes }}>
+              <App /> 
+            </ThemeProvider>
+          </BrowserRouter>
+        </Provider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  )
 )
+// ReactDOM.createRoot(root).render(
+//   <HelmetProvider>
+//     <QueryClientProvider client={client}>
+//       <ReactQueryDevtools/>
+//       <Provider store={store}>
+//         <BrowserRouter>
+//           <GlobalStyles />
+//           <ThemeProvider theme={{ themes }}>
+//             <App /> 
+//           </ThemeProvider>
+//         </BrowserRouter>
+//       </Provider>
+//     </QueryClientProvider>
+//   </HelmetProvider>
+// );
 
