@@ -28,53 +28,54 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 const client = new QueryClient();
 const root = document.getElementById('root') as HTMLElement;
 
-root.hasChildNodes() ? (
-  ReactDOM.hydrateRoot(root, 
-    <HelmetProvider>
-      <QueryClientProvider client={client}>
-        <ReactQueryDevtools/>
-        <Provider store={store}>
-          <BrowserRouter>
-            <GlobalStyles />
-            <ThemeProvider theme={{ themes }}>
-              <App /> 
-            </ThemeProvider>
-          </BrowserRouter>
-        </Provider>
-      </QueryClientProvider>
-    </HelmetProvider>
-    )
-  )
-    : (
-    ReactDOM.createRoot(root).render(
-      <HelmetProvider>
-      <QueryClientProvider client={client}>
-        <ReactQueryDevtools/>
-        <Provider store={store}>
-          <BrowserRouter>
-            <GlobalStyles />
-            <ThemeProvider theme={{ themes }}>
-              <App /> 
-            </ThemeProvider>
-          </BrowserRouter>
-        </Provider>
-      </QueryClientProvider>
-    </HelmetProvider>
-  )
-)
-// ReactDOM.createRoot(root).render(
-//   <HelmetProvider>
-//     <QueryClientProvider client={client}>
-//       <ReactQueryDevtools/>
-//       <Provider store={store}>
-//         <BrowserRouter>
-//           <GlobalStyles />
-//           <ThemeProvider theme={{ themes }}>
-//             <App /> 
-//           </ThemeProvider>
-//         </BrowserRouter>
-//       </Provider>
-//     </QueryClientProvider>
-//   </HelmetProvider>
-// );
+// root.hasChildNodes() ? (
+//   ReactDOM.hydrateRoot(root, 
+//     <HelmetProvider>
+//       <QueryClientProvider client={client}>
+//         <ReactQueryDevtools/>
+//         <Provider store={store}>
+//           <BrowserRouter>
+//             <GlobalStyles />
+//             <ThemeProvider theme={{ themes }}>
+//               <App /> 
+//             </ThemeProvider>
+//           </BrowserRouter>
+//         </Provider>
+//       </QueryClientProvider>
+//     </HelmetProvider>
+//     )
+//   )
+//     : (
+//     ReactDOM.createRoot(root).render(
+//       <HelmetProvider>
+//       <QueryClientProvider client={client}>
+//         <ReactQueryDevtools/>
+//         <Provider store={store}>
+//           <BrowserRouter>
+//             <GlobalStyles />
+//             <ThemeProvider theme={{ themes }}>
+//               <App /> 
+//             </ThemeProvider>
+//           </BrowserRouter>
+//         </Provider>
+//       </QueryClientProvider>
+//     </HelmetProvider>
+//   )
+// )
+
+ReactDOM.createRoot(root).render(
+  <HelmetProvider>
+    <QueryClientProvider client={client}>
+      <ReactQueryDevtools/>
+      <Provider store={store}>
+        <BrowserRouter>
+          <GlobalStyles />
+          <ThemeProvider theme={{ themes }}>
+            <App /> 
+          </ThemeProvider>
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
+  </HelmetProvider>
+);
 
