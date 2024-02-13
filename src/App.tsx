@@ -52,7 +52,7 @@ const App = () => {
     const sc = document.createElement("script");
     sc.src = "/src/plugin/main.bundle.js";
     sc.async = true;
-    sc.type = "module";
+    sc.type = "text/javascript";
     document.body.appendChild(sc);
   }, []);
 
