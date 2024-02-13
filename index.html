@@ -8,6 +8,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script src="/src/plugin/main.bundle.js"></script>
+    <script type="module">
+      (() => {
+        const doc = parent.document.body || parent.document.documentElement;
+        console.log(doc);
+        console.log(parent.document.documentElement);
+        console.log(document.body);
+        console.log(document.documentElement);
+      })()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
