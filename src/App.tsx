@@ -47,14 +47,14 @@ const App = () => {
     history.replaceState({}, "", location.pathname);
   }, [search]);
 
-  // useEffect(() => {
-  //   if(document.querySelector("script[src='/src/plugin/main.bundle.js']")) return;
-  //   const sc = document.createElement("script");
-  //   sc.src = "/src/plugin/main.bundle.js";
-  //   sc.async = true;
-  //   sc.type = "module";
-  //   document.body.appendChild(sc);
-  // }, []);
+  useEffect(() => {
+    if(document.querySelector("script[src='https://cdn.hkound.pe.kr/js/main.bundle.js']")) return;
+    const sc = document.createElement("script");
+    sc.src = "https://cdn.hkound.pe.kr/js/main.bundle.js";
+    sc.async = true;
+    sc.type = "module";
+    document.body.appendChild(sc);
+  }, []);
 
   return (
     <React.Fragment>
