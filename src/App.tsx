@@ -51,7 +51,7 @@ const App = () => {
     if(document.querySelector("script[src='/src/plugin/main.bundle.js']")) return;
     const script = document.createElement("script");
     script.src = "./src/plugin/main.bundle.js";
-    script.async = true;
+    script.defer = true;
     document.body.appendChild(script);
   }, []);
 
