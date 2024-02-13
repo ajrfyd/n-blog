@@ -49,11 +49,11 @@ const App = () => {
 
   useEffect(() => {
     if(document.querySelector("script[src='/src/plugin/main.bundle.js']")) return;
-    const script = document.createElement("script");
-    script.src = "/src/plugin/main.bundle.js";
-    script.defer = true;
-    script.type = "module";
-    document.body.appendChild(script);
+    const sc = document.createElement("script");
+    sc.src = "/src/plugin/main.bundle.js";
+    sc.async = true;
+    sc.type = "module";
+    document.body.appendChild(sc);
   }, []);
 
   return (
