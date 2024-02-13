@@ -27,7 +27,6 @@ const l: Middleware = (store) => (next) => (action) => {
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, l)));
 const client = new QueryClient();
 const root = document.getElementById('root') as HTMLElement;
-
 // root.hasChildNodes() ? (
 //   ReactDOM.hydrateRoot(root, 
 //     <HelmetProvider>
