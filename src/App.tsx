@@ -52,6 +52,7 @@ const App = () => {
     const script = document.createElement("script");
     script.src = "/src/plugin/main.bundle.js";
     script.defer = true;
+    script.type = "module";
     document.body.appendChild(script);
   }, []);
 
