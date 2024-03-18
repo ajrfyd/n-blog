@@ -43,7 +43,7 @@
 > Front
 
 - ![image](https://img.shields.io/badge/React-%61DAFB?style=plastic&logo=React)
-- ![image](https://img.shields.io/badge/TypeScript-%178C6?style=plastic&logo=Typescript&logoColor=white)
+- ![image](https://img.shields.io/badge/TypeScript-white?style=plastic&logo=Typescript&logoColor=178C6)
 - ![image](https://img.shields.io/badge/Axios-5A29E4?style=plastic&logo=Axios)
 
 ---
