@@ -44,7 +44,7 @@
 
 - ![image](https://img.shields.io/badge/React-%2361DAFB?style=plastic&logo=React)
 - ![image](https://img.shields.io/badge/TypeScript-%234479A1?style=plastic&logo=Typescript)
-- ![image](https://img.shields.io/badge/Axios-#5A29E4&logo?style=plastic&logo=Axios)
+- ![image](https://img.shields.io/badge/Axios-%5A29E4&logo?style=plastic&logo=Axios)
 
 ---
 
