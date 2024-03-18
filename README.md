@@ -56,6 +56,12 @@
 - ![image](https://img.shields.io/badge/EXPRESS-000000?style=plastic&logo=Express&logoColor=white)
 - ![image](https://img.shields.io/badge/Sequelize-52B0E7?style=plastic&logo=Sequelize&logoColor=white)
 - ![image](https://img.shields.io/badge/Mysql-4479A1?style=plastic&logo=Mysql&logoColor=white)
+
+---
+
+> Server
+
+- ![image](https://img.shields.io/badge/Ubuntu-E95420?style=plastic&logo=Ubuntu&logoColor=black)
 - ![image](https://img.shields.io/badge/Nginx-009639?style=plastic&logo=Nginx&logoColor=white)
 
 ## 배포
