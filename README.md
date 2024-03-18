@@ -61,7 +61,7 @@
 
 > Server
 
-- ![image](https://img.shields.io/badge/Ubuntu-E95420?style=plastic&logo=Ubuntu&logoColor=black)
+- ![image](https://img.shields.io/badge/Ubuntu-E95420?style=plastic&logo=Ubuntu&logoColor=white)
 - ![image](https://img.shields.io/badge/Nginx-009639?style=plastic&logo=Nginx&logoColor=white)
 
 ## 배포
