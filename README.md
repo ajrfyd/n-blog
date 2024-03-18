@@ -52,8 +52,10 @@
 
 > Back
 
-- ![image](https://img.shields.io/badge/Node.js-%23339933?style=plastic&logo=Node.js)
-- ![image](https://img.shields.io/badge/EXPRESS-%23000000?style=plastic&logo=Express)
+- ![image](https://img.shields.io/badge/Node.js-339933?style=plastic&logo=Node.js&logoColor=white)
+- ![image](https://img.shields.io/badge/EXPRESS-000000?style=plastic&logo=Express&logoColor=white)
+- ![image](https://img.shields.io/badge/Sequelize-52B0E7?style=plastic&logo=Sequelize&logoColor=white)
+- ![image](https://img.shields.io/badge/Mysql-4479A1?style=plastic&logo=Mysql&logoColor=white)
 
 ## 배포
 
