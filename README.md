@@ -46,7 +46,7 @@
 - ![image](https://img.shields.io/badge/TypeScript-3178C6?style=plastic&logo=Typescript&logoColor=white)
 - ![image](https://img.shields.io/badge/Axios-5A29E4?style=plastic&logo=Axios)
 - ![image](https://img.shields.io/badge/Redux-764ABC?style=plastic&logo=Redux&locoColor=black)
-- ![image](https://img.shields.io/badge/Socket.io-010101?style=plastic&logo=Redux&locoColor=white)
+- ![image](https://img.shields.io/badge/Socket.io-010101?style=plastic&logo=Socket.io&locoColor=white)
 
 ---
 
