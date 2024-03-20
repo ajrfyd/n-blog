@@ -52,6 +52,7 @@
 
 > Back
 
+- ![image](https://img.shields.io/badge/TypeScript-3178C6?style=plastic&logo=Typescript&logoColor=white)
 - ![image](https://img.shields.io/badge/Node.js-339933?style=plastic&logo=Node.js&logoColor=white)
 - ![image](https://img.shields.io/badge/EXPRESS-000000?style=plastic&logo=Express&logoColor=white)
 - ![image](https://img.shields.io/badge/Sequelize-52B0E7?style=plastic&logo=Sequelize&logoColor=white)
@@ -75,7 +76,7 @@
 > [레포](https://github.com/ajrfyd/ubuntu-api-server);
 > client > nginx > api Server
 
-[Link](https://k-log3943.netlify.app/)
+[Link](https://klog.hkound.pe.kr/posts)
 
 ## 참고
 
