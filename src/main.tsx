@@ -1,5 +1,6 @@
 // import ReactDOM from "react-dom/client";
-import { render } from "react-dom";
+import { hydrateRoot, createRoot } from "react-dom/client";
+// import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import GlobalStyles from "./lib/styles/GlobalStyles.ts";
@@ -18,7 +19,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { composeWithDevTools } from "redux-devtools-extension";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { hydrate } from "react-dom";
+// import { hydrate } from "react-dom";
 // import './index.css';
 
 const l: Middleware = (store) => (next) => (action) => {
@@ -35,6 +36,7 @@ const store = createStore(
 );
 const client = new QueryClient();
 const root = document.getElementById("root") as HTMLElement;
+const rootDom = createRoot(root);
 const app = (
   <QueryClientProvider client={client}>
     <ReactQueryDevtools />
@@ -51,7 +53,7 @@ const app = (
   </QueryClientProvider>
 );
 
-root?.hasChildNodes() ? hydrate(app, root) : render(app, root);
+root?.hasChildNodes() ? hydrateRoot(root, app) : rootDom.render(app);
 
 // ReactDOM.createRoot(root).render(
 //   <HelmetProvider>
