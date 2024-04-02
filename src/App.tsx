@@ -17,6 +17,7 @@ import useUserState from "./lib/hooks/useLogin";
 import NavBar from "./components/nav/Navbar";
 import PostListPage from "./pages/PostListPage";
 import PostDetail from "./components/post/PostDetail";
+import Post from "./pages/Post";
 import Error from "./components/page/Error";
 import Seo from "./components/helmet/Seo";
 import { ResponseUserType } from "./types";
@@ -98,6 +99,7 @@ const App = () => {
           <Route path="/post/:id" element={<PostDetail user={user} />} />
           <Route path="/write" element={<PostPage />} />
           <Route path="/write/:id" element={<PostPage />} />
+          <Route path="/writet" element={<Post />} />
           <Route path="/error" element={<Error />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

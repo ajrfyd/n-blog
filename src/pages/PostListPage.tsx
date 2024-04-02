@@ -8,11 +8,11 @@ import Categories from "../components/post/Categories";
 import PostCard from "../components/post/PostCard";
 import GridItemContainer from "../components/common/GridItemContainer";
 import MtContainer from "../components/common/MtContainer";
-import MainTitle from '../components/common/MainTitle';
-import SubP from '../components/common/SubP';
+import MainTitle from "../components/common/MainTitle";
+import SubP from "../components/common/SubP";
 import Loading from "../components/page/Loading";
 import NoResults from "../components/page/NoResults";
-import CustomButton from '../components/buttons/CustomButton';
+import CustomButton from "../components/buttons/CustomButton";
 import Seo from "../components/helmet/Seo";
 import { PenToolIcon } from "lucide-react";
 
@@ -37,63 +37,60 @@ const PostListPage = ({ user }: PostListProps) => {
     setIsFetching(true);
     setTag(tag);
   };
-  
+
   return (
     <MtContainer>
-      <Seo 
-        title="블로그 페이지 입니다." 
-        desc="기술 블로그 리스트 입니다." 
-        url="https://k-log3943.netlify.app/posts"
+      <Seo
+        title="블로그 페이지 입니다."
+        desc="기술 블로그 리스트 입니다."
+        url="https://klog.hkound.pe.kr/posts"
       />
-      <Banner >
-        <MainTitle
-          $isShadow
-        >hk's Blog</MainTitle>
+      <Banner>
+        <MainTitle $isShadow>hk's Blog</MainTitle>
         <SubP style={{ marginTop: "2rem" }}>Welcome my page!</SubP>
       </Banner>
-      {
-        data && !isError && (
-          <>
-            <Categories tags={data.result.tags} tagSearchHandler={tagSearchHandler}/>  
-            <Container style={{ height: "100vh" }}>
-              <GridItemContainer>
-                {
-                  data.result.posts.length >= 1 ? data.result.posts.map(post => (
-                    <Col key={post.id}>
-                      <PostCard post={post}/>
-                    </Col>
-                  )) : <NoResults />
-                }
-              </GridItemContainer>
-            </Container>
-          </>
-        )
-      }
-      {
-        isLoading && <Loading />
-      }
-      {
-        isError && <NoResults isError={isError}/>
-      }
-      {
-        (user && user.role === "admin") && (
-          <div style={{
+      {data && !isError && (
+        <>
+          <Categories
+            tags={data.result.tags}
+            tagSearchHandler={tagSearchHandler}
+          />
+          <Container style={{ height: "100vh" }}>
+            <GridItemContainer>
+              {data.result.posts.length >= 1 ? (
+                data.result.posts.map((post) => (
+                  <Col key={post.id}>
+                    <PostCard post={post} />
+                  </Col>
+                ))
+              ) : (
+                <NoResults />
+              )}
+            </GridItemContainer>
+          </Container>
+        </>
+      )}
+      {isLoading && <Loading />}
+      {isError && <NoResults isError={isError} />}
+      {user && user.role === "admin" && (
+        <div
+          style={{
             position: "fixed",
-            right: "2rem", 
+            right: "2rem",
             bottom: "2rem",
-            zIndex: 10
-          }}>
-            <CustomButton
-              $isIcon
-              onClick={() => navigate("/write", { state: user.access_token })}
-            >
-              <PenToolIcon />
-            </CustomButton>
-          </div>
-        ) 
-      }
+            zIndex: 10,
+          }}
+        >
+          <CustomButton
+            $isIcon
+            onClick={() => navigate("/write", { state: user.access_token })}
+          >
+            <PenToolIcon />
+          </CustomButton>
+        </div>
+      )}
     </MtContainer>
-  )
-}
+  );
+};
 
 export default PostListPage;
