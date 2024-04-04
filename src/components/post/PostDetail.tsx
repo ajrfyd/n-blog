@@ -32,7 +32,8 @@ const PostDetail = ({ user }: PostDetailProps) => {
             (tag: { id: string; label: string }) => tag.label
           )}`}
           url={`https://k-log3943.netlify.app/post/${post.id}`}
-          keyword={post.tags.join(", ")}
+          keyword={post.tags.map(({ label }) => label).join(", ")}
+          // [object, object]
         />
       )}
       <Banner>
