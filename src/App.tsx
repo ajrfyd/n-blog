@@ -22,9 +22,10 @@ import Error from "./components/page/Error";
 import Seo from "./components/helmet/Seo";
 import { ResponseUserType } from "./types";
 
+const { VITE_KLOG_URL, VITE_CHAT_MODULE_URL } = import.meta.env;
 const App = () => {
   const [user, setUser] = useUserState();
-  let { search, pathname } = useLocation();
+  let { search } = useLocation();
   const dispatch = useDispatch();
 
   const logInHandler = () =>
@@ -63,27 +64,25 @@ const App = () => {
   }, [search]);
 
   useEffect(() => {
-    if (
-      document.querySelector(
-        "script[src='https://cdn.hkound.pe.kr/js/main.bundle.js']"
-      )
-    )
-      return;
+    if (document.querySelector(`script[src='${VITE_CHAT_MODULE_URL}']`)) return;
     const sc = document.createElement("script");
-    sc.src = "https://cdn.hkound.pe.kr/js/main.bundle.js";
+    sc.src = VITE_CHAT_MODULE_URL;
     sc.async = true;
     sc.type = "module";
     document.body.appendChild(sc);
   }, []);
+
+  console.log(import.meta.env.VITE_CHAT_MODULE_URL);
 
   return (
     <React.Fragment>
       <Seo
         title="Welcome to hk's blog"
         desc="2년차 개발자의 개인 블로그입니다."
-        url={pathname}
+        url={VITE_KLOG_URL}
         imgUrl="/javascript.jpg"
         site_name="hk's blog"
+        keyword="main, intro"
       />
       <Suspense fallback={<Loading />}>
         {/* <Header /> */}
