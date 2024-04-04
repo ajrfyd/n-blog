@@ -72,8 +72,6 @@ const App = () => {
     document.body.appendChild(sc);
   }, []);
 
-  console.log(import.meta.env.VITE_CHAT_MODULE_URL);
-
   return (
     <React.Fragment>
       <Seo
