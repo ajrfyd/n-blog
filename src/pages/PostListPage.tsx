@@ -44,6 +44,7 @@ const PostListPage = ({ user }: PostListProps) => {
         title="블로그 페이지 입니다."
         desc="기술 블로그 리스트 입니다."
         url="https://klog.hkound.pe.kr/posts"
+        keyword="list, posts, 포스트 목록"
       />
       <Banner>
         <MainTitle $isShadow>hk's Blog</MainTitle>

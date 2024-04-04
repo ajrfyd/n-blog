@@ -80,7 +80,7 @@ const App = () => {
         url={VITE_KLOG_URL}
         imgUrl="/javascript.jpg"
         site_name="hk's blog"
-        keyword="main, intro"
+        keyword="main, intro, 블로그, 기술 블로그"
       />
       <Suspense fallback={<Loading />}>
         {/* <Header /> */}
