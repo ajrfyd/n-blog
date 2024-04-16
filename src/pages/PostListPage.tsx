@@ -15,7 +15,6 @@ import NoResults from "../components/page/NoResults";
 import CustomButton from "../components/buttons/CustomButton";
 import Seo from "../components/helmet/Seo";
 import { PenToolIcon } from "lucide-react";
-import { getPosts } from "../lib/api/api";
 
 type PostListProps = {
   user: ResponseUserType;
@@ -32,14 +31,6 @@ const PostListPage = ({ user }: PostListProps) => {
     setIsFetching(false);
   }, [tag]);
 
-  const t = async () => {
-    const a = await getPosts();
-    console.log(a, "A??");
-  };
-  useEffect(() => {
-    t();
-    console.log("ASDASDASDS");
-  }, []);
   // const { data, isLoading } = usePostsQuery(title, tag);
   // const titleHandler = (title: string) => setTitle(title);
   const tagSearchHandler = (tag: TagType) => {
