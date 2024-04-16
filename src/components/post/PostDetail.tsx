@@ -31,7 +31,7 @@ const PostDetail = ({ user }: PostDetailProps) => {
           desc={`${post.title} - ${post.tags.map(
             (tag: { id: string; label: string }) => tag.label
           )}`}
-          url={`https://klog.hkound.pe.kr/post/${post.id}`}
+          url={`/post/${post.id}`}
           keyword={post.tags.map(({ label }) => label).join(", ")}
           // [object, object]
         />

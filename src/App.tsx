@@ -76,7 +76,7 @@ const App = () => {
       <Seo
         title="Welcome to hk's blog"
         desc="2년차 개발자의 개인 블로그입니다."
-        url="https://klog.hkound.pe.kr"
+        url="/"
         imgUrl="/javascript.jpg"
         site_name="hk's blog"
         keyword="main, intro, 블로그, 기술 블로그"

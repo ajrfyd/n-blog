@@ -43,7 +43,7 @@ const PostListPage = ({ user }: PostListProps) => {
       <Seo
         title="Welcome to hk's blog"
         desc="2년차 개발자의 기술 블로그 입니다."
-        url="https://klog.hkound.pe.kr"
+        url="/"
         keyword="klog, blog, tech, list, posts, 포스트 목록"
       />
       <Banner>

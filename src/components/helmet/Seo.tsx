@@ -15,10 +15,11 @@ const Seo = ({
   title,
   desc,
   url,
-  site_name,
+  site_name = "klog",
   imgUrl,
   keyword = "",
 }: SeoProps) => {
+  const rootUrl = "https://klog.hkound.pe.kr";
   return (
     <Helmet>
       <title>{title}</title>
@@ -30,10 +31,15 @@ const Seo = ({
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={site_name} />
       <meta property="og:title" content={title} />
-      <meta property="og:url" content={url} />
+      <meta
+        property="og:url"
+        content={url === "/" ? rootUrl : rootUrl + `${url}`}
+      />
       <meta property="og:description" content={desc} />
       <meta property="og:image" content={imgUrl ? imgUrl : jsImg} />
-      <link rel="canonical" href={url} />
+      <meta property="og:image:width" content="560" />
+      <meta property="og:image:height" content="300" />
+      <link rel="canonical" href={url === "/" ? rootUrl : rootUrl + `${url}`} />
     </Helmet>
   );
 };
