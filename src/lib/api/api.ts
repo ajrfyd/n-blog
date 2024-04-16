@@ -16,6 +16,55 @@ const getTagsUrl =
 const oauthLoginUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 const baseUrl = VITE_ENV === "development" ? VITE_DEV_URL : VITE_PROD_URL;
 
+const klogInstance = axios.create({
+  baseURL: VITE_ENV === "development" ? VITE_DEV_URL : VITE_KLOG_URL,
+  headers: {
+    "Content-Type": "Application/json",
+  },
+});
+
+export const getPosts = async <T = PostListType>(): Promise<T> => {
+  const { data } = await klogInstance.get("/klog/post");
+  return data;
+};
+
+//* use
+const reqKlogApi = axios.create({
+  baseURL: VITE_ENV === "development" ? VITE_DEV_URL : VITE_KLOG_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+//* use
+export const reqPostData = async <T = PostListType>(
+  id: string | null
+): Promise<T> => {
+  const { data } = await reqKlogApi.get<T>(
+    `/klog/post${id ? `/tag/${id}` : ""}`
+  );
+  // try {
+  // const { data } = await testApi.get<T>(`/klog/post${id ? `/tag/${id}` : ""}`);
+
+  //   return data;
+
+  // } catch(e) {
+  //   throw(e);
+  // }
+  return data;
+};
+
+//* use
+export const reqPostById = async <T>(id: string) => {
+  const { data } = await reqKlogApi.get<ServerDefaultResponseType<T>>(
+    `/klog/post/${id}`,
+    { withCredentials: true }
+  );
+  // const { data } = await testApi.get<ServerDefaultResponseType<T>>(`/klog/post/${id}`);
+
+  return data;
+};
+
 // type ResponseType<T> = AxiosResponse<T> & {
 //   data: T;
 // };
@@ -86,43 +135,9 @@ export const updatePost = axios.create({
   baseURL: baseUrl + "posts",
 });
 
-const reqKlogApi = axios.create({
-  baseURL: VITE_KLOG_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
 // const reqGithubOauthApi = axios.create({
 //   baseURL: `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GH_ID}`
 // });
-
-export const reqPostData = async <T = PostListType>(
-  id: string | null
-): Promise<T> => {
-  const { data } = await reqKlogApi.get<T>(
-    `/klog/post${id ? `/tag/${id}` : ""}`
-  );
-  // try {
-  // const { data } = await testApi.get<T>(`/klog/post${id ? `/tag/${id}` : ""}`);
-
-  //   return data;
-
-  // } catch(e) {
-  //   throw(e);
-  // }
-  return data;
-};
-
-export const reqPostById = async <T>(id: string) => {
-  const { data } = await reqKlogApi.get<ServerDefaultResponseType<T>>(
-    `/klog/post/${id}`,
-    { withCredentials: true }
-  );
-  // const { data } = await testApi.get<ServerDefaultResponseType<T>>(`/klog/post/${id}`);
-
-  return data;
-};
 
 export const reqTagsData = async <T>(): Promise<T> => {
   const { data } = await reqKlogApi.get("/klog/tags");

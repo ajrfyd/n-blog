@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import { PostType } from '../../types';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import Slider from '../slider/Slider';
+import React, { useCallback, useState } from "react";
+import Card from "react-bootstrap/Card";
+import { PostType } from "../../types";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Slider from "../slider/Slider";
 
 type PostCardProps = {
   post: PostType;
@@ -11,28 +11,34 @@ type PostCardProps = {
 
 const PostCard = ({ post }: PostCardProps) => {
   const [hovered, setHovered] = useState(false);
-  const navigate = useNavigate();
-  const getCreatedAt = useCallback((date: string) => new Intl.DateTimeFormat("ko", { dateStyle: "medium" }).format(new Date(date)), []);
+  // const navigate = useNavigate();
+  const getCreatedAt = useCallback(
+    (date: string) =>
+      new Intl.DateTimeFormat("ko", { dateStyle: "medium" }).format(
+        new Date(date)
+      ),
+    []
+  );
   // (date: string) => new Intl.DateTimeFormat("ko", { dateStyle: "medium" }).format(new Date(date))
 
   return (
-    <CardContainer 
-      onClick={() => navigate(`/post/${post.id}`)}
+    <CardContainer
+      // onClick={() => navigate(`/post/${post.id}`)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* <Card.Header>Tags</Card.Header> */}
-      <Card.Header>{getCreatedAt(post.createdAt.toString())}</Card.Header>
-      <Card.Body>
-        <Card.Title>{post.title}</Card.Title>
-        <Card.Text>
-          { post.body }
-        </Card.Text>
-      </Card.Body>
-      <Slider items={post.tags} $hovered={hovered}/>
+      <Link to={`/post/${post.id}`}>
+        {/* <Card.Header>Tags</Card.Header> */}
+        <Card.Header>{getCreatedAt(post.createdAt.toString())}</Card.Header>
+        <Card.Body>
+          <Card.Title>{post.title}</Card.Title>
+          <Card.Text>{post.body}</Card.Text>
+        </Card.Body>
+        <Slider items={post.tags} $hovered={hovered} />
+      </Link>
     </CardContainer>
-  )
-}
+  );
+};
 
 export default React.memo(PostCard);
 
@@ -60,6 +66,10 @@ const CardContainer = styled(Card)`
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  a {
+    color: inherit;
   }
 `;

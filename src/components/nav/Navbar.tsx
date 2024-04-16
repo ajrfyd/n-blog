@@ -1,25 +1,25 @@
 // import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { UserStateType } from '../../types';
-import { useDispatch } from 'react-redux';
-import { notify } from '../../stroe/notify';
+import styled from "styled-components";
+import { UserStateType } from "../../types";
+import { useDispatch } from "react-redux";
+import { notify } from "../../stroe/notify";
 // import { oauthApi } from '../../lib/api/api';
-import Container from 'react-bootstrap/Container';
+import Container from "react-bootstrap/Container";
 // import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 // import NavDropdown from 'react-bootstrap/NavDropdown';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import Logo from './Logo';
-import Iconbutton from '../buttons/IconButton';
-import { GithubIcon, UnplugIcon } from 'lucide-react';
-import NavMenuItem from './NavMenuItem';
+import Offcanvas from "react-bootstrap/Offcanvas";
+import Logo from "./Logo";
+import Iconbutton from "../buttons/IconButton";
+import { GithubIcon, UnplugIcon } from "lucide-react";
+import NavMenuItem from "./NavMenuItem";
 
 type NavBarProps = {
   logInHandler: () => void;
   logOutHandler: () => void;
   user: UserStateType | null;
-}
+};
 
 const NavBar = ({ logInHandler, logOutHandler, user }: NavBarProps) => {
   const dispatch = useDispatch();
@@ -54,30 +54,33 @@ const NavBar = ({ logInHandler, logOutHandler, user }: NavBarProps) => {
   // }, []);
 
   return (
-    <NavContainer className="mb-3" expand={"md"} fixed='top'>
-      <Container >
+    <NavContainer className="mb-3" expand={"md"} fixed="top">
+      <Container>
         <Logo />
         {/* <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand> */}
-        <Navbar.Toggle aria-controls={'offcanvasNavbar-expand}'} />
+        <Navbar.Toggle aria-controls={"offcanvasNavbar-expand}"} />
         <Navbar.Offcanvas
-          id={'offcanvasNavbar-expand}'}
-          aria-labelledby={'offcanvasNavbarLabel-expand}'}
+          id={"offcanvasNavbar-expand}"}
+          aria-labelledby={"offcanvasNavbarLabel-expand}"}
           placement="end"
         >
-          <Offcanvas.Header closeButton >
-            <Offcanvas.Title id={'offcanvasNavbarLabel-expand-}'}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title id={"offcanvasNavbarLabel-expand-}"}>
               klog
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
               {/* <Nav.Link href="#action1">Posts</Nav.Link> */}
-              <NavMenuItem to="/posts" onClick={() => dispatch(notify("블로그 페이지 입니다."))}>Posts</NavMenuItem>
+              <NavMenuItem
+                to="/"
+                onClick={() => dispatch(notify("블로그 페이지 입니다."))}
+              >
+                Posts
+              </NavMenuItem>
               {/* <NavMenuItem onClick={() => dispatch(notify("준비중 입니다."))}>Photos</NavMenuItem>
               <NavMenuItem onClick={() => dispatch(notify("준비중 입니다."))}>Sample</NavMenuItem> */}
-              
-              
-              
+
               {/* <NavDropdown
                 title="Dropdown"
                 id={'offcanvasNavbarDropdown-expand}'}
@@ -93,9 +96,11 @@ const NavBar = ({ logInHandler, logOutHandler, user }: NavBarProps) => {
               </NavDropdown> */}
               <BtnContainer>
                 <Iconbutton>
-                  {
-                    user ? <UnplugIcon onClick={logOutHandler}/> : <GithubIcon onClick={logInHandler}/> 
-                  }
+                  {user ? (
+                    <UnplugIcon onClick={logOutHandler} />
+                  ) : (
+                    <GithubIcon onClick={logInHandler} />
+                  )}
                 </Iconbutton>
               </BtnContainer>
               {/* <Iconbutton
@@ -104,13 +109,12 @@ const NavBar = ({ logInHandler, logOutHandler, user }: NavBarProps) => {
                 <Sun />
               </Iconbutton> */}
             </Nav>
-            
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>
     </NavContainer>
   );
-}
+};
 
 export default NavBar;
 
@@ -120,4 +124,4 @@ const NavContainer = styled(Navbar)`
 
 const BtnContainer = styled.div`
   margin: 0 1rem;
-`
+`;

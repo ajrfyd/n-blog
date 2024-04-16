@@ -4,7 +4,7 @@ import { reqOauth } from "./lib/api/api";
 import { useDispatch } from "react-redux";
 import { notify } from "./stroe/notify";
 // import Header from "./layouts/Header";
-import Main from "./pages/Main";
+// import Main from "./pages/Main";
 // import PostsMain from "./pages/PostsMain";
 // import BackDrop from './components/BackDrop';
 import PostPage from "./pages/PostPage";
@@ -17,7 +17,6 @@ import useUserState from "./lib/hooks/useLogin";
 import NavBar from "./components/nav/Navbar";
 import PostListPage from "./pages/PostListPage";
 import PostDetail from "./components/post/PostDetail";
-import Post from "./pages/Post";
 import Error from "./components/page/Error";
 import Seo from "./components/helmet/Seo";
 import { ResponseUserType } from "./types";
@@ -90,13 +89,14 @@ const App = () => {
           logOutHandler={logOutHandler}
         />
         <Routes>
-          <Route path="/" element={<Main />} />
+          {/* <Route path="/" element={<Main />} /> */}
           {/* <Route path="/posts" element={<PostsMain />}/> */}
-          <Route path="/posts" element={<PostListPage user={user} />} />
+          <Route path="/" element={<PostListPage user={user} />} />
+
+          {/* <Route path="/posts" element={<PostListPage user={user} />} /> */}
           <Route path="/post/:id" element={<PostDetail user={user} />} />
           <Route path="/write" element={<PostPage />} />
           <Route path="/write/:id" element={<PostPage />} />
-          <Route path="/writet" element={<Post />} />
           <Route path="/error" element={<Error />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

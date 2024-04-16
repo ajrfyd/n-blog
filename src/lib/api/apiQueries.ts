@@ -1,14 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { 
-  getPostsData, getTagsApi, getPostByIdApi, 
-  reqPostData, reqPostById, reqTagsData
+import {
+  getPostsData,
+  getTagsApi,
+  getPostByIdApi,
+  reqPostData,
+  reqPostById,
+  reqTagsData,
 } from "./api";
 import { toBeSavedPostsType } from "../../stroe/posts";
-import { 
-  ServerTagType, PostListType, 
-  TagListResultType, TagType, 
-  PostType 
-} from '../../types';
+import {
+  ServerTagType,
+  PostListType,
+  TagListResultType,
+  TagType,
+  PostType,
+} from "../../types";
 // import { AxiosError, AxiosResponse } from "axios";
 
 // export const usePostQuery = (postId: string, isRender: boolean) => {
@@ -24,16 +30,38 @@ import {
 //   // return { data, isLoading, error };
 // };
 
+//* use
+export const useReqPostData = (isFetching: boolean, tag: TagType | null) => {
+  const { data, isLoading, failureReason, isError } = useQuery<PostListType>({
+    queryKey: ["reqPost"],
+    queryFn: () => reqPostData(tag ? tag.value : null),
+    // select: d => (console.log(d), d),
+    enabled: isFetching,
+  });
+
+  return { data, isLoading, failureReason, isError };
+};
+
+//* use
+export const useReqPostDataById = (id: string) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["post"],
+    queryFn: () => reqPostById<PostType>(id),
+    select: (response) => response.result,
+  });
+
+  return { data, isLoading };
+};
+
 export const usePostQuery = (postId: string, isRender: boolean) => {
   return useQuery({
     queryKey: ["postById", postId],
     queryFn: ({ queryKey }) => getPostByIdApi(queryKey[1]),
-    select: ({ post }) =>  (post),
+    select: ({ post }) => post,
     // notifyOnChangeProps: ['data'],
-    enabled: isRender
+    enabled: isRender,
   });
 };
-
 
 export const usePostsQuery = (title: string = "", tag: TagType | null) => {
   // const reqFn = (title === "" && tag) ? () => getPostsByTag(tag.value) : getPostsData;
@@ -44,11 +72,19 @@ export const usePostsQuery = (title: string = "", tag: TagType | null) => {
     retry: 2,
     // select: afterFn
     select: (data) => {
-      if(title !== "" && tag === null) return { tags: data.tags, posts: data.posts.filter(post => post.title.toLowerCase().includes(title.toLowerCase())) };
-      if(title === "" && tag && tag.label !== "All") {
-        const posts = data.posts.filter(post => post.tags.some(pTag => pTag.id === tag.value));
+      if (title !== "" && tag === null)
+        return {
+          tags: data.tags,
+          posts: data.posts.filter((post) =>
+            post.title.toLowerCase().includes(title.toLowerCase())
+          ),
+        };
+      if (title === "" && tag && tag.label !== "All") {
+        const posts = data.posts.filter((post) =>
+          post.tags.some((pTag) => pTag.id === tag.value)
+        );
         return { posts, tags: data.tags };
-      };
+      }
       return data;
     },
     // enabled: req,
@@ -64,37 +100,16 @@ export const useAllTagsQuery = (isModify: boolean) => {
     queryKey: ["tags"],
     queryFn: getTagsApi,
     select: ({ data }: { data: ServerTagType[] }) => data,
-    enabled: isModify
+    enabled: isModify,
   });
 
   return data;
 };
 
-export const useReqPostData = (isFetching: boolean, tag: TagType | null) => {
-  const { data, isLoading, failureReason, isError } = useQuery<PostListType>({
-    queryKey: ["reqPost"],
-    queryFn: () => reqPostData(tag ? tag.value : null),
-    // select: d => (console.log(d), d),
-    enabled: isFetching,
-  });
-
-  return { data, isLoading, failureReason, isError };
-};
-
-export const useReqPostDataById = (id: string) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["post"],
-    queryFn: () => reqPostById<PostType>(id),
-    select: response => response.result
-  });
-
-  return { data, isLoading };
-};
-
 export const useReqAllTagsData = () => {
   const { data: tagList, isLoading } = useQuery<TagListResultType>({
     queryKey: ["tags"],
-    queryFn: reqTagsData
+    queryFn: reqTagsData,
   });
   return { tagList, isLoading };
 };
