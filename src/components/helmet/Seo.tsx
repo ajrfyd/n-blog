@@ -33,6 +33,7 @@ const Seo = ({
       <meta property="og:url" content={url} />
       <meta property="og:description" content={desc} />
       <meta property="og:image" content={imgUrl ? imgUrl : jsImg} />
+      <link rel="canonical" href={url} />
     </Helmet>
   );
 };

@@ -41,10 +41,10 @@ const PostListPage = ({ user }: PostListProps) => {
   return (
     <MtContainer>
       <Seo
-        title="블로그 페이지 입니다."
-        desc="기술 블로그 리스트 입니다."
-        url="https://klog.hkound.pe.kr/posts"
-        keyword="list, posts, 포스트 목록"
+        title="Welcome to hk's blog"
+        desc="2년차 개발자의 기술 블로그 입니다."
+        url="https://klog.hkound.pe.kr"
+        keyword="klog, blog, tech, list, posts, 포스트 목록"
       />
       <Banner>
         <MainTitle $isShadow>hk's Blog</MainTitle>

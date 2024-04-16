@@ -31,7 +31,7 @@ const PostDetail = ({ user }: PostDetailProps) => {
           desc={`${post.title} - ${post.tags.map(
             (tag: { id: string; label: string }) => tag.label
           )}`}
-          url={`https://k-log3943.netlify.app/post/${post.id}`}
+          url={`https://klog.hkound.pe.kr/post/${post.id}`}
           keyword={post.tags.map(({ label }) => label).join(", ")}
           // [object, object]
         />

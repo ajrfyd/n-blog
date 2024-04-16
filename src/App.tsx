@@ -70,13 +70,13 @@ const App = () => {
     sc.type = "module";
     document.body.appendChild(sc);
   }, []);
-
+  console.log(VITE_KLOG_URL);
   return (
     <React.Fragment>
       <Seo
         title="Welcome to hk's blog"
         desc="2년차 개발자의 개인 블로그입니다."
-        url={VITE_KLOG_URL}
+        url="https://klog.hkound.pe.kr"
         imgUrl="/javascript.jpg"
         site_name="hk's blog"
         keyword="main, intro, 블로그, 기술 블로그"
