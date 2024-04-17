@@ -21,7 +21,7 @@ import Error from "./components/page/Error";
 import Seo from "./components/helmet/Seo";
 import { ResponseUserType } from "./types";
 
-const { VITE_KLOG_URL, VITE_CHAT_MODULE_URL } = import.meta.env;
+const { VITE_CHAT_MODULE_URL } = import.meta.env;
 const App = () => {
   const [user, setUser] = useUserState();
   let { search } = useLocation();
@@ -70,7 +70,7 @@ const App = () => {
     sc.type = "module";
     document.body.appendChild(sc);
   }, []);
-  console.log(VITE_KLOG_URL);
+
   return (
     <React.Fragment>
       <Seo
